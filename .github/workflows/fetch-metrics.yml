@@ -22,14 +22,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install aiohttp tqdm
+          pip install aiohttp tqdm asyncio
           
       - name: Fetch metrics
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ORG: ${{ vars.ORG }}
         run: |
-          actionboard_data_collector.py
+          python3 actionboard_data_collector.py
           
       - name: Commit and push if changes exist
         run: |
