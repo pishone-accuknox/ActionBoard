@@ -1,4 +1,6 @@
 let currentTheme = "light";
+let barChartInstance = null; // Track the bar chart instance
+let trendChartInstance = null; // Track the trend chart instance
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -36,9 +38,9 @@ async function loadTimeAnalysis() {
 
   // Horizontal Bar Chart for Workflow Time Analysis
   const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
-  if (window.barChart) window.barChart.destroy(); // Clear existing chart
-  window.barChart = new Chart(barChartCtx, {
-    type: 'horizontalBar',
+  if (barChartInstance) barChartInstance.destroy(); // Clear existing chart
+  barChartInstance = new Chart(barChartCtx, {
+    type: 'bar',
     data: {
       labels: sortedData.labels,
       datasets: [{
@@ -59,16 +61,14 @@ async function loadTimeAnalysis() {
 
   // Compact Daily Trend Line Chart
   const trendChartCtx = document.getElementById('trendChart').getContext('2d');
-  const trendLabels = trendData.map(item => item.date);
-  const trendValues = trendData.map(item => item.totalMinutes);
-  if (window.trendChart) window.trendChart.destroy(); // Clear existing chart
-  window.trendChart = new Chart(trendChartCtx, {
+  if (trendChartInstance) trendChartInstance.destroy(); // Clear existing chart
+  trendChartInstance = new Chart(trendChartCtx, {
     type: 'line',
     data: {
-      labels: trendLabels,
+      labels: trendData.map(item => item.date),
       datasets: [{
         label: 'Daily Runtime Trend (minutes)',
-        data: trendValues,
+        data: trendData.map(item => item.totalMinutes),
         borderColor: 'rgba(153, 102, 255, 0.8)',
         fill: false,
         tension: 0.4, // Smooth curves
@@ -85,8 +85,8 @@ async function loadTimeAnalysis() {
 
 async function loadFailures() {
   const failuresData = await fetchData('data/failed_runs.json');
-  const failuresTable = document.querySelector('#failuresTable tbody');
-  failuresTable.innerHTML = ''; // Clear existing rows
+  const failuresTableBody = document.querySelector('#failuresTable tbody');
+  failuresTableBody.innerHTML = ''; // Clear existing rows
 
   failuresData.forEach(run => {
     const row = document.createElement('tr');
@@ -95,7 +95,7 @@ async function loadFailures() {
       <td>${run.workflow_name}</td>
       <td><a href="${run.html_url}" target="_blank">View Run</a></td>
     `;
-    failuresTable.appendChild(row);
+    failuresTableBody.appendChild(row);
   });
 }
 
