@@ -1,6 +1,6 @@
 let currentTheme = "light";
-let barChartInstance = null; // Track the bar chart instance
-let trendChartInstance = null; // Track the trend chart instance
+let barChartInstance = null;
+let trendChartInstance = null;
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -16,12 +16,27 @@ function showTab(tabId) {
 async function loadTimeAnalysis() {
   const workflowData = await fetchData('data/workflow_runs.json');
   const trendData = await fetchData('data/daily_trend.json');
-  const dateFilter = document.getElementById('dateFilter').value;
+  
+  const dateFilter = Array.from(document.getElementById('dateFilter').selectedOptions).map(
+    option => option.value
+  );
+
+  // Populate the date filter dropdown dynamically
+  const uniqueDates = [...new Set(workflowData.map(run => run.created_at.split("T")[0]))];
+  const dateFilterElement = document.getElementById('dateFilter');
+  if (dateFilterElement.options.length === 0) {
+    uniqueDates.forEach(date => {
+      const option = document.createElement('option');
+      option.value = date;
+      option.textContent = date;
+      dateFilterElement.appendChild(option);
+    });
+  }
 
   // Aggregate workflows by name and repo
   const aggregatedData = workflowData.reduce((acc, run) => {
     const date = run.created_at.split("T")[0];
-    if ((!dateFilter || date === dateFilter) && run.total_time_minutes > 0) {
+    if ((!dateFilter.length || dateFilter.includes(date)) && run.total_time_minutes > 0) {
       const key = `${run.repo} - ${run.workflow_name}`;
       acc[key] = (acc[key] || 0) + run.total_time_minutes;
     }
