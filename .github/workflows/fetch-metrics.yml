@@ -27,9 +27,9 @@ jobs:
       - name: Fetch metrics
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ORG: ${{ vars.GITHUB_ORG }}
+          GITHUB_ORG: ${{ vars.ORG }}
         run: |
-          python scripts/fetch_github_metrics.py
+          actionboard_data_collector.py
           
       - name: Commit and push if changes exist
         run: |
