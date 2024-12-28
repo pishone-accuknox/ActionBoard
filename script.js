@@ -1,5 +1,5 @@
 let currentTheme = "light";
-let barChartInstance = null; // Track the bar chart instance
+let doughnutChartInstance = null; // Track the doughnut chart instance
 let trendChartInstance = null; // Track the trend chart instance
 
 async function fetchData(url) {
@@ -36,27 +36,40 @@ async function loadTimeAnalysis() {
       return acc;
     }, { labels: [], data: [] });
 
-  // Horizontal Bar Chart for Workflow Time Analysis
-  const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
-  if (barChartInstance) barChartInstance.destroy(); // Clear existing chart
-  barChartInstance = new Chart(barChartCtx, {
-    type: 'bar',
+  // Doughnut Chart for Workflow Time Analysis
+  const doughnutChartCtx = document.getElementById('workflowBarChart').getContext('2d');
+  if (doughnutChartInstance) doughnutChartInstance.destroy(); // Clear existing chart
+  doughnutChartInstance = new Chart(doughnutChartCtx, {
+    type: 'doughnut',
     data: {
       labels: sortedData.labels,
       datasets: [{
         label: 'Billable Time (minutes)',
         data: sortedData.data,
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        backgroundColor: sortedData.labels.map(
+          () => `hsl(${Math.random() * 360}, 70%, 70%)`
+        ), // Random colors for each segment
       }],
     },
     options: {
       responsive: true,
-      indexAxis: 'y',
-      scales: {
-        x: { beginAtZero: true },
-        y: { beginAtZero: true }
-      }
-    }
+      plugins: {
+        legend: {
+          display: true,
+          position: 'right',
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const value = context.raw;
+              const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
+              const percentage = ((value / total) * 100).toFixed(2);
+              return `${context.label}: ${value} minutes (${percentage}%)`;
+            },
+          },
+        },
+      },
+    },
   });
 
   // Compact Daily Trend Line Chart
