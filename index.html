@@ -20,6 +20,8 @@
     <label for="dateFilter">Filter by Date:</label>
     <input type="date" id="dateFilter" onchange="loadTimeAnalysis()">
     <canvas id="workflowBarChart" width="800" height="400"></canvas>
+    <h2>Daily Runtime Trend</h2>
+    <canvas id="trendChart" width="400" height="200"></canvas>
   </div>
   <div id="failures" class="tab-content" style="display: none;">
     <h1>Workflow Failures</h1>
@@ -34,7 +36,6 @@
       <tbody></tbody>
     </table>
   </div>
-  <canvas id="trendChart" width="800" height="400"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
