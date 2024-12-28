@@ -8,7 +8,7 @@ const WorkflowFailures = () => {
   const { data: failures, isLoading } = useQuery({
     queryKey: ['failedRuns'],
     queryFn: async () => {
-      const response = await fetch('/data/failed_runs.json');
+      const response = await fetch('/ActionBoard/data/failed_runs.json');
       return response.json();
     },
   });

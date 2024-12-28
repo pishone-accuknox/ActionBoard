@@ -10,7 +10,7 @@ const TimeAnalysis = () => {
     const { data: workflowRuns, isLoading } = useQuery({
       queryKey: ['workflowRuns'],
       queryFn: async () => {
-        const response = await fetch('/data/workflow_runs.json');
+        const response = await fetch('/ActionBoard/data/workflow_runs.json');
         return response.json();
       },
     });

@@ -7,7 +7,7 @@ const DailyTrendChart = () => {
   const { data: dailyTrend, isLoading } = useQuery({
     queryKey: ['dailyTrend'],
     queryFn: async () => {
-      const response = await fetch('/data/daily_trend.json');
+      const response = await fetch('/ActionBoard/data/daily_trend.json');
       return response.json();
     },
   });
