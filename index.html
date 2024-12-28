@@ -17,8 +17,8 @@
   </div>
   <div id="time-analysis" class="tab-content">
     <h1>Workflow Time Analysis</h1>
-    <label for="dateFilter">Filter by Date:</label>
-    <input type="date" id="dateFilter" onchange="loadTimeAnalysis()">
+    <label for="dateFilter">Filter by Dates:</label>
+    <select id="dateFilter" multiple onchange="loadTimeAnalysis()"></select>
     <canvas id="workflowBarChart" width="800" height="400"></canvas>
     <h2>Daily Runtime Trend</h2>
     <canvas id="trendChart" width="400" height="200"></canvas>
