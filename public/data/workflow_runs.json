@@ -1,11 +1,1 @@
-[
-  {
-    "repo": "accuknox-frontend",
-    "workflow_name": "Push SonarQube scans to SaaS",
-    "run_id": 12521948717,
-    "status": "success",
-    "created_at": "2024-12-28T00:02:34Z",
-    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12521948717",
-    "total_time_minutes": 18.0
-  }
-]
+[]
