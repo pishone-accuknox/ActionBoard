@@ -1,25 +1,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExternalLink, AlertCircle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const WorkflowFailures = () => {
-  // Mock data - replace with actual GitHub API calls
-  const failures = [
-    {
-      id: 1,
-      repo: "org/repo-1",
-      workflow: "CI",
-      failedAt: "2024-03-20T10:00:00Z",
-      url: "https://github.com/org/repo-1/actions/runs/123",
+  const { data: failures, isLoading } = useQuery({
+    queryKey: ['failedRuns'],
+    queryFn: async () => {
+      const response = await fetch('/data/failed_runs.json');
+      return response.json();
     },
-    {
-      id: 2,
-      repo: "org/repo-2",
-      workflow: "Deploy",
-      failedAt: "2024-03-20T09:30:00Z",
-      url: "https://github.com/org/repo-2/actions/runs/456",
-    },
-  ];
+  });
+
+  if (isLoading) {
+    return <Skeleton className="w-full h-[300px]" />;
+  }
 
   return (
     <Card>
@@ -29,15 +25,15 @@ const WorkflowFailures = () => {
       <CardContent>
         <div className="space-y-4">
           {failures.map((failure) => (
-            <Alert key={failure.id} variant="destructive">
+            <Alert key={failure.run_id} variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle className="font-semibold">
-                {failure.repo} - {failure.workflow}
+                {failure.repo} - {failure.workflow_name}
               </AlertTitle>
               <AlertDescription className="flex justify-between items-center">
-                <span>Failed at {new Date(failure.failedAt).toLocaleString()}</span>
+                <span>Failed at {new Date(failure.created_at).toLocaleString()}</span>
                 <a
-                  href={failure.url}
+                  href={failure.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center text-sm hover:underline"

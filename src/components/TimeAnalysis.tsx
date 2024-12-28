@@ -3,13 +3,21 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recha
 import { DatePickerWithRange } from "@/components/DateRangePicker";
 import DailyTrendChart from "./DailyTrendChart";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const TimeAnalysis = () => {
-  // Mock data - replace with actual GitHub API calls
-  const data = Array.from({ length: 50 }, (_, i) => ({
-    name: `repo-${i + 1}/${i % 2 === 0 ? 'ci' : 'deploy'}`,
-    minutes: Math.floor(Math.random() * 200) + 20,
-  }));
+    const { data: workflowRuns, isLoading } = useQuery({
+      queryKey: ['workflowRuns'],
+      queryFn: async () => {
+        const response = await fetch('/data/workflow_runs.json');
+        return response.json();
+      },
+    });
+
+    if (isLoading) {
+      return <Skeleton className="w-full h-[500px]" />;
+    }
 
   return (
     <div className="space-y-4">
@@ -26,19 +34,22 @@ const TimeAnalysis = () => {
             <div className="min-w-[800px]">
               <ResponsiveContainer width="100%" height={1600}>
                 <BarChart 
-                  data={data} 
+                  data={workflowRuns} 
                   layout="vertical" 
                   margin={{ top: 20, right: 30, left: 150, bottom: 5 }}
                 >
                   <XAxis type="number" label={{ value: 'Minutes', position: 'bottom' }} />
                   <YAxis 
-                    dataKey="name" 
+                    dataKey={(record) => `${record.repo}/${record.workflow_name}`} 
                     type="category" 
                     width={140}
                     tick={{ fontSize: 12 }}
                   />
-                  <Tooltip />
-                  <Bar dataKey="minutes" fill="#2ea44f" />
+                  <Tooltip 
+                    formatter={(value) => [`${value} minutes`, 'Total Runtime']}
+                    labelFormatter={(label) => label}
+                  />
+                  <Bar dataKey="total_time_minutes" fill="#2ea44f" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
