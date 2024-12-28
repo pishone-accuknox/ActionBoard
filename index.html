@@ -8,23 +8,18 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">🌙</button>
+  </div>
   <div class="tabs">
     <button class="tab-button" onclick="showTab('time-analysis')">Workflow Time Analysis</button>
     <button class="tab-button" onclick="showTab('failures')">Workflow Failures</button>
   </div>
   <div id="time-analysis" class="tab-content">
     <h1>Workflow Time Analysis</h1>
-    <canvas id="trendChart" width="800" height="400"></canvas>
-    <table id="workflowTable">
-      <thead>
-        <tr>
-          <th>Repository</th>
-          <th>Workflow Name</th>
-          <th>Total Billable Time (minutes)</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <label for="dateFilter">Filter by Date:</label>
+    <input type="date" id="dateFilter" onchange="loadTimeAnalysis()">
+    <canvas id="workflowBarChart" width="800" height="400"></canvas>
   </div>
   <div id="failures" class="tab-content" style="display: none;">
     <h1>Workflow Failures</h1>
@@ -39,6 +34,7 @@
       <tbody></tbody>
     </table>
   </div>
+  <canvas id="trendChart" width="800" height="400"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
