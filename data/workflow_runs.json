@@ -2626,5 +2626,23 @@
     "created_at": "2024-12-25T15:20:12Z",
     "html_url": "https://github.com/accuknox/deployments/actions/runs/12494357385",
     "total_time_minutes": 0.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12532996329,
+    "status": "success",
+    "created_at": "2024-12-29T06:02:39Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12532996329",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Demo",
+    "run_id": 12532729578,
+    "status": "success",
+    "created_at": "2024-12-29T05:14:42Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12532729578",
+    "total_time_minutes": 0.0
   }
 ]
