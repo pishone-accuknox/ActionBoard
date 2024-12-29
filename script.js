@@ -13,28 +13,28 @@ function showTab(tabId) {
     tab.style.display = tab.id === tabId ? 'block' : 'none';
   });
 
-  // Highlight the active tab
+  // Highlight the selected tab
   document.querySelectorAll('.tab-button').forEach(button => {
-    button.classList.toggle('active', button.getAttribute('onclick').includes(tabId));
+    button.classList.remove('active');
   });
+  document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+
+  // Load specific content for the selected tab
+  if (tabId === 'time-analysis') {
+    loadTimeAnalysis();
+  } else if (tabId === 'failures') {
+    loadFailures();
+  } else if (tabId === 'trend') {
+    loadTrendChart();
+  }
 }
 
 async function loadTimeAnalysis() {
   const workflowData = await fetchData('data/workflow_runs.json');
-  const trendData = await fetchData('data/daily_trend.json');
 
-  // Get from/to dates and set defaults
-  const fromDateInput = document.getElementById('fromDate');
-  const toDateInput = document.getElementById('toDate');
-  const today = new Date();
-  const sevenDaysAgo = new Date(today);
-  sevenDaysAgo.setDate(today.getDate() - 7);
-
-  if (!fromDateInput.value) fromDateInput.value = sevenDaysAgo.toISOString().split('T')[0];
-  if (!toDateInput.value) toDateInput.value = today.toISOString().split('T')[0];
-
-  const fromDate = new Date(fromDateInput.value);
-  const toDate = new Date(toDateInput.value);
+  // Get from/to dates from hidden inputs
+  const fromDate = new Date(document.getElementById('fromDate').value);
+  const toDate = new Date(document.getElementById('toDate').value);
 
   // Filter workflow data by date range
   const aggregatedData = workflowData.reduce((acc, run) => {
@@ -54,31 +54,104 @@ async function loadTimeAnalysis() {
       return acc;
     }, { labels: [], data: [] });
 
-  // Horizontal Bar Chart for Workflow Time Analysis
-  const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
-  if (barChartInstance) barChartInstance.destroy(); // Clear existing chart
-  barChartInstance = new Chart(barChartCtx, {
-    type: 'bar',
-    data: {
-      labels: sortedData.labels,
-      datasets: [{
-        label: 'Billable Time (minutes)',
-        data: sortedData.data,
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
-      }],
-    },
-    options: {
-      responsive: true,
-      indexAxis: 'y',
-      scales: {
-        x: { beginAtZero: true },
-        y: { beginAtZero: true }
-      }
-    }
-  });
+// Horizontal Bar Chart for Workflow Time Analysis
+const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
 
-  // Compact Daily Trend Line Chart
-  const trendChartCtx = document.getElementById('trendChart').getContext('2d');
+// Create gradient fill for the bars
+const gradient = barChartCtx.createLinearGradient(0, 0, 0, barChartCtx.canvas.height);
+gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
+gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
+
+// Detect theme
+const isDarkTheme = document.body.classList.contains('dark-theme');
+const textColor = isDarkTheme ? '#e0e0e0' : '#333333'; // Adjust text color based on theme
+const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+if (barChartInstance) barChartInstance.destroy(); // Clear existing chart
+barChartInstance = new Chart(barChartCtx, {
+  type: 'bar',
+  data: {
+    labels: sortedData.labels,
+    datasets: [{
+      label: 'Billable Time (minutes)',
+      data: sortedData.data,
+      backgroundColor: gradient,
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+    }],
+  },
+  options: {
+    responsive: true,
+    indexAxis: 'y',
+    animation: {
+      duration: 1000,
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return `${context.dataset.label}: ${context.raw} minutes`;
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        ticks: {
+          color: textColor, // Use dynamic text color
+          font: {
+            size: 12,
+            weight: 'bold',
+          },
+        },
+        grid: {
+          color: gridColor, // Subtle grid lines based on theme
+        },
+      },
+      y: {
+        ticks: {
+          color: textColor, // Use dynamic text color
+          font: {
+            size: 12,
+            weight: 'bold',
+          },
+        },
+        grid: {
+          display: false,
+        },
+      },
+    },
+  },
+});
+}
+
+// Load Daily Runtime Trend chart
+async function loadTrendChart() {
+  const trendData = await fetchData('data/daily_trend.json');
+
+  // Wait for the canvas to be fully visible before rendering
+  const trendChartCanvas = document.getElementById('trendChart');
+
+  if (trendChartInstance) trendChartInstance.destroy(); // Clear existing chart
+
+  // Use a timeout to ensure rendering after visibility
+setTimeout(() => {
+  const trendChartCtx = trendChartCanvas.getContext('2d');
+
+  // Detect theme
+  const isDarkTheme = document.body.classList.contains('dark-theme');
+  const textColor = isDarkTheme ? '#e0e0e0' : '#333333'; // Adjust text color based on theme
+  const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+  // Create gradient fill
+  const gradient = trendChartCtx.createLinearGradient(0, 0, 0, trendChartCanvas.clientHeight);
+  gradient.addColorStop(0, 'rgba(75, 192, 192, 0.7)'); // Top color
+  gradient.addColorStop(1, 'rgba(75, 192, 192, 0)');   // Transparent bottom
+
   if (trendChartInstance) trendChartInstance.destroy(); // Clear existing chart
   trendChartInstance = new Chart(trendChartCtx, {
     type: 'line',
@@ -87,18 +160,47 @@ async function loadTimeAnalysis() {
       datasets: [{
         label: 'Daily Runtime Trend (minutes)',
         data: trendData.map(item => item.totalMinutes),
-        borderColor: 'rgba(153, 102, 255, 0.8)',
-        fill: false,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 2,
+        fill: true,
+        backgroundColor: gradient, // Apply gradient fill
         tension: 0.4, // Smooth curves
       }],
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.raw} minutes`;
+            },
+          },
+        },
       },
-    }
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: textColor, // Use dynamic text color
+            maxTicksLimit: 7, // Limit x-axis labels
+          },
+        },
+        y: {
+          grid: {
+            color: gridColor,
+          },
+          ticks: {
+            beginAtZero: true,
+            color: textColor, // Use dynamic text color
+          },
+        },
+      },
+    },
   });
+}, 100); // Delay slightly to ensure proper rendering
 }
 
 async function loadFailures() {
@@ -164,14 +266,45 @@ function toggleTheme() {
   const isChecked = document.getElementById("checkboxInput").checked;
   document.body.className = isChecked ? "dark-theme" : "light-theme";
   localStorage.setItem("theme", isChecked ? "dark" : "light");
+
+  loadTimeAnalysis();
+  loadTrendChart();
 }
 
 // Load theme preference on page load
 window.onload = () => {
+  showTab('time-analysis');
   const savedTheme = localStorage.getItem("theme") || "light";
   document.body.className = savedTheme === "dark" ? "dark-theme" : "light-theme";
   document.getElementById("checkboxInput").checked = savedTheme === "dark";
-};
+
+  // Date Range Picker
+  flatpickr('#dateRange', {
+    mode: 'range',
+    dateFormat: 'Y-m-d',
+    defaultDate: [
+      new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 7 days ago
+      new Date().toISOString().split('T')[0] // Today
+    ],
+    onReady: (selectedDates) => {
+      // Set default values to hidden inputs on initial load
+      if (selectedDates.length === 2) {
+        const [fromDate, toDate] = selectedDates;
+        document.getElementById('fromDate').value = fromDate.toISOString().split('T')[0];
+        document.getElementById('toDate').value = toDate.toISOString().split('T')[0];
+        loadTimeAnalysis(); // Render the graph with default range
+      }
+    },
+    onClose: (selectedDates) => {
+      if (selectedDates.length === 2) {
+        const [fromDate, toDate] = selectedDates;
+        document.getElementById('fromDate').value = fromDate.toISOString().split('T')[0];
+        document.getElementById('toDate').value = toDate.toISOString().split('T')[0];
+        loadTimeAnalysis(); // Reload the graph when a new range is selected
+      }
+    },
+  });
+};  
 
 // Initial Load
 loadTimeAnalysis();

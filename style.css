@@ -8,14 +8,14 @@ body {
 
 /* Light Theme */
 body.light-theme {
-  background-color: #ffffff;
-  color: #000000;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  color: #333333;
 }
 
 /* Dark Theme */
 body.dark-theme {
-  background-color: #121212;
-  color: #ffffff;
+  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+  color: #e0e0e0;
 }
 
 /* Theme Toggle */
@@ -30,13 +30,20 @@ body.dark-theme {
 .tabs {
   display: flex;
   justify-content: center;
-  background-color: #2c2c2c; /* Fixed dark color for tabs background */
+  background-color: #ffffff;
   padding: 10px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+body.dark-theme .tabs {
+  background-color: #1e1e1e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* General Tab Styles */
 .tab-button {
   background-color: transparent;
-  color: #ffffff;
+  color: inherit;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -45,30 +52,45 @@ body.dark-theme {
 }
 
 .tab-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-body.light-theme .tabs {
-  background-color: #f0f0f0;
-}
-
-body.light-theme .tab-button {
-  color: #000000;
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle hover effect */
 }
 
 body.light-theme .tab-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05); /* Light grey hover for light theme */
 }
 
-/* Highlight the active tab */
+body.dark-theme .tab-button:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light hover for dark theme */
+}
+
+/* Active Tab Styles (Selected Tab) */
 .tab-button.active {
   font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #007bff; /* Blue background for the selected tab */
+  color: #ffffff; /* White text for contrast */
   border-radius: 5px;
 }
 
+/* Light Theme Styles */
+body.light-theme .tab-button {
+  background-color: transparent; /* Default for unselected tabs */
+  color: #333333; /* Dark text for unselected tabs */
+}
+
 body.light-theme .tab-button.active {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #007bff; /* Blue background for the selected tab */
+  color: #ffffff;
+}
+
+/* Dark Theme Styles */
+body.dark-theme .tab-button {
+  background-color: #000000; /* Black background for unselected tabs */
+  color: #ffffff; /* Light text for unselected tabs */
+}
+
+body.dark-theme .tab-button.active {
+  background-color: #007bff; /* Blue background for the selected tab */
+  color: #ffffff; /* White text for contrast */
 }
 
 /* Tables */
@@ -342,4 +364,35 @@ body.dark-theme .failure-table tr:hover {
 #checkboxInput:checked+.toggleSwitch {
   background-color: rgb(148, 118, 255);
   transition-duration: .2s;
+}
+
+/* Daily Runtime Trend Graph */
+#trendChart {
+  width: 80%; /* Half screen width */
+  max-width: 1000px; /* Limit maximum size */
+  height: auto;
+  margin: 0 auto; /* Center the graph */
+  display: block;
+}
+
+/* Responsive Design for Mobile */
+@media screen and (max-width: 768px) {
+  #trendChart {
+    width: 90%; /* Full width for smaller screens */
+  }
+}
+
+.chart-container {
+  width: 100%;
+  padding: 0 10px; /* Add small gaps on both sides */
+  overflow-x: hidden; /* Prevent unnecessary scrolling */
+  margin: 20px auto;
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+#workflowBarChart {
+  width: 100%;
+  height: 400px;
+  margin: 0 auto; /* Center the graph */
+  display: block;
 }

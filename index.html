@@ -13,19 +13,29 @@
     <label for="checkboxInput" class="toggleSwitch"></label>
   </div>  
   <div class="tabs">
-    <button class="tab-button" onclick="showTab('time-analysis')">Workflow Time Analysis</button>
-    <button class="tab-button" onclick="showTab('failures')">Workflow Failures</button>
+    <button class="tab-button" id="timeAnalysisTab" onclick="showTab('time-analysis')">Workflow Time Analysis</button>
+    <button class="tab-button" id="failuresTab" onclick="showTab('failures')">Workflow Failures</button>
+    <button class="tab-button" id="trendTab" onclick="showTab('trend')">Daily Runtime Trend</button>
   </div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
   <div id="time-analysis" class="tab-content">
-    <h2>Workflow Time Analysis</h2>
     <div class="date-filters">
-      <label for="fromDate">From:</label>
-      <input type="date" id="fromDate" onchange="loadTimeAnalysis()">
-      <label for="toDate">To:</label>
-      <input type="date" id="toDate" onchange="loadTimeAnalysis()">
+      <input type="hidden" id="fromDate">
+      <input type="hidden" id="toDate">
+      <label for="dateRange">Date Range:</label>
+      <input type="text" id="dateRange" placeholder="Select date range">
     </div>
-    <canvas id="workflowBarChart" width="800" height="400"></canvas>
-    <h2>Daily Runtime Trend</h2>
+    <div class="chart-container">
+      <canvas id="workflowBarChart"></canvas>
+    </div>    
+  </div>
+  
+  <div id="failures" class="tab-content" style="display: none;">
+    <div id="failuresContainer"></div>
+  </div>
+  <div id="trend" class="tab-content" style="display: none;">
     <canvas id="trendChart" width="400" height="200"></canvas>
   </div>
   <div id="failures" class="tab-content" style="display: none;">
