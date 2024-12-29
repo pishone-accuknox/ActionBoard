@@ -8,8 +8,14 @@ async function fetchData(url) {
 }
 
 function showTab(tabId) {
+  // Hide all tab contents
   document.querySelectorAll('.tab-content').forEach(tab => {
     tab.style.display = tab.id === tabId ? 'block' : 'none';
+  });
+
+  // Highlight the active tab
+  document.querySelectorAll('.tab-button').forEach(button => {
+    button.classList.toggle('active', button.getAttribute('onclick').includes(tabId));
   });
 }
 
@@ -97,24 +103,75 @@ async function loadTimeAnalysis() {
 
 async function loadFailures() {
   const failuresData = await fetchData('data/failed_runs.json');
-  const failuresTableBody = document.querySelector('#failuresTable tbody');
-  failuresTableBody.innerHTML = ''; // Clear existing rows
+  const failuresContainer = document.getElementById('failuresContainer');
+  failuresContainer.innerHTML = ''; // Clear existing content
 
-  failuresData.forEach(run => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${run.repo}</td>
-      <td>${run.workflow_name}</td>
-      <td><a href="${run.html_url}" target="_blank">View Run</a></td>
+  // Group failures by date
+  const groupedFailures = failuresData.reduce((acc, run) => {
+    const date = run.created_at.split('T')[0]; // Extract YYYY-MM-DD
+    acc[date] = acc[date] || [];
+    acc[date].push(run);
+    return acc;
+  }, {});
+
+  // Render a collapsible table for each day
+  Object.keys(groupedFailures).sort((a, b) => new Date(b) - new Date(a)).forEach(date => {
+    // Create a collapsible section
+    const section = document.createElement('div');
+    section.classList.add('failure-section');
+
+    const toggleButton = document.createElement('button');
+    toggleButton.classList.add('toggle-button');
+    toggleButton.textContent = `Failures on ${date}`;
+    toggleButton.onclick = () => {
+      const table = section.querySelector('table');
+      table.style.display = table.style.display === 'none' ? 'table' : 'none';
+    };
+
+    const table = document.createElement('table');
+    table.classList.add('failure-table');
+    table.style.display = 'table'; // Visible by default
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Repository</th>
+          <th>Workflow Name</th>
+          <th>Date</th>
+          <th>Run Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${groupedFailures[date]
+          .map(run => `
+            <tr>
+              <td>${run.repo}</td>
+              <td>${run.workflow_name}</td>
+              <td>${run.created_at.split('T')[0]}</td>
+              <td><a href="${run.html_url}" target="_blank">View Run</a></td>
+            </tr>
+          `)
+          .join('')}
+      </tbody>
     `;
-    failuresTableBody.appendChild(row);
+
+    section.appendChild(toggleButton);
+    section.appendChild(table);
+    failuresContainer.appendChild(section);
   });
 }
 
 function toggleTheme() {
-  currentTheme = currentTheme === "light" ? "dark" : "light";
-  document.body.className = currentTheme;
+  const isChecked = document.getElementById("checkboxInput").checked;
+  document.body.className = isChecked ? "dark-theme" : "light-theme";
+  localStorage.setItem("theme", isChecked ? "dark" : "light");
 }
+
+// Load theme preference on page load
+window.onload = () => {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  document.body.className = savedTheme === "dark" ? "dark-theme" : "light-theme";
+  document.getElementById("checkboxInput").checked = savedTheme === "dark";
+};
 
 // Initial Load
 loadTimeAnalysis();

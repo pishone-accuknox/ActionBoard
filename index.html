@@ -9,8 +9,9 @@
 </head>
 <body>
   <div class="theme-toggle">
-    <button onclick="toggleTheme()">🌙</button>
-  </div>
+    <input type="checkbox" id="checkboxInput" onchange="toggleTheme()">
+    <label for="checkboxInput" class="toggleSwitch"></label>
+  </div>  
   <div class="tabs">
     <button class="tab-button" onclick="showTab('time-analysis')">Workflow Time Analysis</button>
     <button class="tab-button" onclick="showTab('failures')">Workflow Failures</button>
@@ -28,17 +29,10 @@
     <canvas id="trendChart" width="400" height="200"></canvas>
   </div>
   <div id="failures" class="tab-content" style="display: none;">
-    <h1>Workflow Failures</h1>
-    <table id="failuresTable">
-      <thead>
-        <tr>
-          <th>Repository</th>
-          <th>Workflow Name</th>
-          <th>Run Link</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div id="failures" class="tab-content" style="display: none;">
+      <h1>Workflow Failures</h1>
+      <div id="failuresContainer"></div>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
