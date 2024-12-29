@@ -18,14 +18,6 @@ body.dark-theme {
   color: #e0e0e0;
 }
 
-/* Theme Toggle */
-.theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
 /* Tabs Container */
 .tabs {
   display: flex;
@@ -42,13 +34,13 @@ body.dark-theme .tabs {
 
 /* General Tab Styles */
 .tab-button {
-  background-color: transparent;
-  color: inherit;
+  background: transparent;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
 }
 
 .tab-button:hover {
@@ -148,30 +140,48 @@ body.dark-theme a:hover {
   text-decoration: underline;
 }
 
-/* Buttons */
+/* General Button Styles */
 button {
-  background-color: #007bff;
+  background-color: rgba(75, 192, 192, 1); /* Teal color for light theme */
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 15px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: rgba(60, 160, 160, 1); /* Slightly darker teal on hover */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px); /* Subtle lift on hover */
 }
 
+/* Dark Theme Button Styles */
 body.dark-theme button {
-  background-color: #4c4cff;
+  background-color: rgba(75, 192, 192, 0.8); /* Softer teal for dark theme */
   color: white;
 }
 
 body.dark-theme button:hover {
-  background-color: #3b3bd9;
+  background-color: rgba(60, 160, 160, 0.8); /* Slightly darker teal for dark theme hover */
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Optional: Disabled Button Styles */
+button:disabled {
+  background-color: #cccccc; /* Gray background for disabled state */
+  color: #666666;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+body.dark-theme button:disabled {
+  background-color: #666666; /* Darker gray for disabled state in dark theme */
+  color: #999999;
 }
 
 canvas {
@@ -179,7 +189,6 @@ canvas {
 }
 
 .theme-toggle {
-  position: fixed;
   top: 10px;
   right: 10px;
 }
@@ -217,13 +226,6 @@ body.dark-theme .date-filters input {
   border-color: #555;
 }
 
-.failure-section {
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
 .toggle-button {
   width: 100%;
   background-color: #f1f1f1;
@@ -251,14 +253,15 @@ body.dark-theme .date-filters input {
 
 /* Table Caption Styles */
 .failure-table caption {
+  font-size: 18px;
   font-weight: bold;
   text-align: left;
   margin-bottom: 10px;
-  color: #000000; /* Default for light theme */
+  color: rgba(75, 192, 192, 1); /* Graph label color for light theme */
 }
 
 body.dark-theme .failure-table caption {
-  color: #ffffff; /* Adjust for dark theme */
+  color: rgba(75, 192, 192, 0.7); /* Graph label color for dark theme */
 }
 
 /* Toggle Button */
@@ -324,7 +327,7 @@ body.dark-theme .failure-table tr:hover {
 
 
 /* From Uiverse.io by vinodjangid07 */ 
-/* To hide the checkbox */
+/* Hide the checkbox */
 #checkboxInput {
   display: none;
 }
@@ -339,7 +342,8 @@ body.dark-theme .failure-table tr:hover {
   background-color: rgb(82, 82, 82);
   border-radius: 20px;
   cursor: pointer;
-  transition-duration: .2s;
+  transition-duration: 0.2s;
+  margin-left: 15px; /* Add spacing to separate from the GitHub button */
 }
 
 .toggleSwitch::after {
@@ -350,20 +354,21 @@ body.dark-theme .failure-table tr:hover {
   left: 5px;
   background-color: transparent;
   border-radius: 50%;
-  transition-duration: .2s;
+  transition-duration: 0.2s;
   box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
   border: 5px solid white;
 }
 
-#checkboxInput:checked+.toggleSwitch::after {
+#checkboxInput:checked + .toggleSwitch::after {
   transform: translateX(100%);
-  transition-duration: .2s;
+  transition-duration: 0.2s;
   background-color: white;
 }
+
 /* Switch background change */
-#checkboxInput:checked+.toggleSwitch {
+#checkboxInput:checked + .toggleSwitch {
   background-color: rgb(148, 118, 255);
-  transition-duration: .2s;
+  transition-duration: 0.2s;
 }
 
 /* Daily Runtime Trend Graph */
@@ -395,4 +400,51 @@ body.dark-theme .failure-table tr:hover {
   height: 400px;
   margin: 0 auto; /* Center the graph */
   display: block;
+}
+
+/* Header Layout */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  gap: 10px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between GitHub button and toggle */
+}
+
+body.dark-theme .header {
+  background-color: #2b2b2b;
+}
+
+
+/* Last Updated */
+.last-updated {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 15px;
+  color: #333;
+}
+
+body.dark-theme .last-updated {
+  color: #e0e0e0;
+}
+
+/* GitHub Button */
+.github-button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.github-button:hover {
+  background-color: #333333;
 }

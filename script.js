@@ -139,6 +139,7 @@ async function loadTrendChart() {
   if (trendChartInstance) trendChartInstance.destroy(); // Clear existing chart
 
   // Use a timeout to ensure rendering after visibility
+// Use a timeout to ensure rendering after visibility
 setTimeout(() => {
   const trendChartCtx = trendChartCanvas.getContext('2d');
 
@@ -190,7 +191,7 @@ setTimeout(() => {
         },
         y: {
           grid: {
-            color: gridColor,
+            color: gridColor, // Subtle grid lines based on theme
           },
           ticks: {
             beginAtZero: true,
@@ -262,6 +263,34 @@ async function loadFailures() {
   });
 }
 
+async function updateLastUpdated() {
+  const lastUpdatedElement = document.getElementById('lastUpdated');
+
+  try {
+    const response = await fetch('data/last_processed_time.json'); // Adjust path if needed
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    const lastProcessedTime = new Date(data.last_processed_time);
+
+    // Format the date
+    const formattedDate = lastProcessedTime.toLocaleString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+
+    lastUpdatedElement.textContent = formattedDate;
+  } catch (error) {
+    console.error('Error fetching last_processed_time.json:', error);
+    lastUpdatedElement.textContent = 'Error loading timestamp';
+  }
+}
+
 function toggleTheme() {
   const isChecked = document.getElementById("checkboxInput").checked;
   document.body.className = isChecked ? "dark-theme" : "light-theme";
@@ -309,3 +338,4 @@ window.onload = () => {
 // Initial Load
 loadTimeAnalysis();
 loadFailures();
+updateLastUpdated();
