@@ -16,27 +16,24 @@ function showTab(tabId) {
 async function loadTimeAnalysis() {
   const workflowData = await fetchData('data/workflow_runs.json');
   const trendData = await fetchData('data/daily_trend.json');
-  
-  const dateFilter = Array.from(document.getElementById('dateFilter').selectedOptions).map(
-    option => option.value
-  );
 
-  // Populate the date filter dropdown dynamically
-  const uniqueDates = [...new Set(workflowData.map(run => run.created_at.split("T")[0]))];
-  const dateFilterElement = document.getElementById('dateFilter');
-  if (dateFilterElement.options.length === 0) {
-    uniqueDates.forEach(date => {
-      const option = document.createElement('option');
-      option.value = date;
-      option.textContent = date;
-      dateFilterElement.appendChild(option);
-    });
-  }
+  // Get from/to dates and set defaults
+  const fromDateInput = document.getElementById('fromDate');
+  const toDateInput = document.getElementById('toDate');
+  const today = new Date();
+  const sevenDaysAgo = new Date(today);
+  sevenDaysAgo.setDate(today.getDate() - 7);
 
-  // Aggregate workflows by name and repo
+  if (!fromDateInput.value) fromDateInput.value = sevenDaysAgo.toISOString().split('T')[0];
+  if (!toDateInput.value) toDateInput.value = today.toISOString().split('T')[0];
+
+  const fromDate = new Date(fromDateInput.value);
+  const toDate = new Date(toDateInput.value);
+
+  // Filter workflow data by date range
   const aggregatedData = workflowData.reduce((acc, run) => {
-    const date = run.created_at.split("T")[0];
-    if ((!dateFilter.length || dateFilter.includes(date)) && run.total_time_minutes > 0) {
+    const runDate = new Date(run.created_at.split("T")[0]);
+    if (runDate >= fromDate && runDate <= toDate && run.total_time_minutes > 0) {
       const key = `${run.repo} - ${run.workflow_name}`;
       acc[key] = (acc[key] || 0) + run.total_time_minutes;
     }

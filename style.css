@@ -47,3 +47,16 @@ canvas {
   cursor: pointer;
   font-size: 1.2em;
 }
+
+.date-filters {
+  margin-bottom: 20px;
+}
+
+.date-filters label {
+  margin-right: 5px;
+}
+
+.date-filters input {
+  margin-right: 15px;
+  padding: 5px;
+}
