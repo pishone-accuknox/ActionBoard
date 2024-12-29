@@ -170,16 +170,29 @@ canvas {
 }
 
 .date-filters {
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
+  align-items: center;
+  gap: 10px; /* Add spacing between elements */
   margin-bottom: 20px;
 }
 
 .date-filters label {
-  margin-right: 5px;
+  font-weight: bold;
 }
 
 .date-filters input {
-  margin-right: 15px;
   padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+body.dark-theme .date-filters input {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
 }
 
 .failure-section {
@@ -204,10 +217,50 @@ canvas {
   background-color: #ddd;
 }
 
+/* Failure Table Section */
+.failure-section {
+  width: 100%;
+  max-width: 800px; /* Match table's width */
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Table Caption Styles */
+.failure-table caption {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 10px;
+  color: #000000; /* Default for light theme */
+}
+
+body.dark-theme .failure-table caption {
+  color: #ffffff; /* Adjust for dark theme */
+}
+
+/* Toggle Button */
+.toggle-button {
+  width: 100%; /* Inherit parent width */
+  background-color: #585858; /* Updated background color */
+  border: none;
+  text-align: left;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: #777;
+}
+
+/* Table Styles */
 .failure-table {
   width: 100%;
-  max-width: 800px; /* Optional limit for readability */
-  margin: 10px 0 0 0; /* Align to the left */
+  max-width: 800px; /* Match parent width */
+  margin: 0;
   border-collapse: collapse;
 }
 
@@ -223,11 +276,11 @@ canvas {
 }
 
 .failure-table tr:nth-child(even) {
-  background-color: #f2f2f2; /* Even rows */
+  background-color: #f2f2f2;
 }
 
 .failure-table tr:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Consistent hover for all rows */
+  background-color: rgba(0, 0, 0, 0.1); /* Consistent hover for light theme */
 }
 
 body.dark-theme .failure-table {
@@ -236,15 +289,15 @@ body.dark-theme .failure-table {
 
 body.dark-theme .failure-table th {
   background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff; /* Ensure header text is visible */
+  color: #ffffff;
 }
 
 body.dark-theme .failure-table tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.05); /* Even rows in dark theme */
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 body.dark-theme .failure-table tr:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Consistent hover for dark theme */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 
