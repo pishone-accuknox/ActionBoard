@@ -1,7 +1,7 @@
 import aiohttp
 import asyncio
 from tqdm.asyncio import tqdm_asyncio
-from datetime import datetime, timedelta
+from datetime import datetime, timezone
 import json
 import os
 
@@ -49,8 +49,8 @@ def get_dynamic_time_limit():
     time_limit_path = "data/last_processed_time.json"
     last_processed_time = load_existing_data(time_limit_path, expected_type=dict)
     if last_processed_time:
-        return last_processed_time.get("last_processed_time", datetime.combine(datetime.now().date(), datetime.min.time()).isoformat())
-    return datetime.combine(datetime.now().date(), datetime.min.time()).isoformat()
+        return last_processed_time.get("last_processed_time", datetime.combine(datetime.now(timezone.utc).date(), datetime.min.time()).isoformat())
+    return datetime.combine(datetime.now(timezone.utc).date(), datetime.min.time()).isoformat()
 
 
 async def fetch(session, url):
