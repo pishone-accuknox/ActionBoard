@@ -1,27 +1,43 @@
 [
   {
     "date": "2024-12-16",
-    "totalMinutes": 0.0
+    "totalMinutes": 1204.0
   },
   {
     "date": "2024-12-17",
-    "totalMinutes": 0.0
+    "totalMinutes": 1763.0
   },
   {
     "date": "2024-12-18",
-    "totalMinutes": 0.0
+    "totalMinutes": 2116.0
+  },
+  {
+    "date": "2024-12-19",
+    "totalMinutes": 1062.0
   },
   {
     "date": "2024-12-20",
-    "totalMinutes": 0.0
+    "totalMinutes": 959.0
+  },
+  {
+    "date": "2024-12-21",
+    "totalMinutes": 218.0
+  },
+  {
+    "date": "2024-12-22",
+    "totalMinutes": 121.0
   },
   {
     "date": "2024-12-23",
-    "totalMinutes": 0.0
+    "totalMinutes": 1259.0
+  },
+  {
+    "date": "2024-12-24",
+    "totalMinutes": 1174.0
   },
   {
     "date": "2024-12-25",
-    "totalMinutes": 42.0
+    "totalMinutes": 136.0
   },
   {
     "date": "2024-12-26",
@@ -37,10 +53,10 @@
   },
   {
     "date": "2024-12-29",
-    "totalMinutes": 46.0
+    "totalMinutes": 62.0
   },
   {
     "date": "2024-12-30",
-    "totalMinutes": 0.0
+    "totalMinutes": 362.0
   }
 ]
