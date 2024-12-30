@@ -79,5 +79,14 @@
     "created_at": "2024-12-26T04:55:12Z",
     "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12499813507",
     "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-jobs",
+    "workflow_name": "secret-scan",
+    "run_id": 12361617487,
+    "status": "failure",
+    "created_at": "2024-12-16T21:28:37Z",
+    "html_url": "https://github.com/accuknox/accuknox-jobs/actions/runs/12361617487",
+    "total_time_minutes": 0.0
   }
 ]
