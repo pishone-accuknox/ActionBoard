@@ -7,8 +7,6 @@ on:
 jobs:
   fetch-metrics:
     runs-on: ubuntu-latest
-    env:
-      TZ: Asia/Kolkata
     permissions:
       contents: write
       
@@ -31,6 +29,7 @@ jobs:
           GITHUB_ORG: ${{ vars.ORG }}
         run: |
           python3 actionboard_data_collector.py
+          date
           
       - name: Commit and push if changes exist
         run: |
