@@ -25,7 +25,7 @@ jobs:
           
       - name: Fetch metrics
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_PAT }}
           GITHUB_ORG: ${{ vars.ORG }}
         run: |
           python3 actionboard_data_collector.py
