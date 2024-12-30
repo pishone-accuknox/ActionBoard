@@ -153,8 +153,8 @@ async def main():
     daily_usage_data = load_existing_data("data/daily_trend.json", expected_type=dict)
     processed_run_ids = set(load_existing_data("data/processed_run_ids.json", expected_type=list))
 
-    # Get dynamic TIME_LIMIT
     TIME_LIMIT = get_dynamic_time_limit()
+    print(f"DEBUG: TIME_LIMIT used for fetching runs: {TIME_LIMIT}")
 
     async with aiohttp.ClientSession() as session:
         print(f"Fetching repositories for organization: {ORG_NAME}")
