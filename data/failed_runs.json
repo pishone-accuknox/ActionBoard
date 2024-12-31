@@ -4462,5 +4462,14 @@
     "created_at": "2024-12-31T06:10:24Z",
     "html_url": "https://github.com/accuknox/swagger-merger/actions/runs/12556197849",
     "total_time_minutes": 2.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12556963608,
+    "status": "failure",
+    "created_at": "2024-12-31T07:42:21Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12556963608",
+    "total_time_minutes": 1.0
   }
 ]
