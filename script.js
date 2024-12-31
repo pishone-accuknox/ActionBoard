@@ -8,7 +8,6 @@ async function fetchData(url) {
 }
 
 function showTab(tabId) {
-  // Hide all tab contents
   document.querySelectorAll('.tab-content').forEach(tab => {
     tab.style.display = tab.id === tabId ? 'block' : 'none';
   });
@@ -19,7 +18,6 @@ function showTab(tabId) {
   });
   document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
 
-  // Load specific content for the selected tab
   if (tabId === 'time-analysis') {
     loadTimeAnalysis();
   } else if (tabId === 'failures') {
@@ -32,16 +30,27 @@ function showTab(tabId) {
 async function loadTimeAnalysis() {
   const workflowData = await fetchData('data/workflow_runs.json');
 
-  // Get from/to dates from hidden inputs
+  const COST_PER_MINUTE = {
+    UBUNTU: 0.008,
+    WINDOWS: 0.016,
+    MACOS: 0.08
+  };
+  let totalCost = 0;
+
   const fromDate = new Date(document.getElementById('fromDate').value);
   const toDate = new Date(document.getElementById('toDate').value);
 
-  // Filter workflow data by date range
+  // Filter workflow data by date range and calculate costs
   const aggregatedData = workflowData.reduce((acc, run) => {
     const runDate = new Date(run.created_at.split("T")[0]);
     if (runDate >= fromDate && runDate <= toDate && run.total_time_minutes > 0) {
       const key = `${run.repo} - ${run.workflow_name}`;
       acc[key] = (acc[key] || 0) + run.total_time_minutes;
+
+      // Calculate cost for this run
+      if (run.os && COST_PER_MINUTE[run.os]) {
+        totalCost += run.total_time_minutes * COST_PER_MINUTE[run.os];
+      }
     }
     return acc;
   }, {});
@@ -54,79 +63,81 @@ async function loadTimeAnalysis() {
       return acc;
     }, { labels: [], data: [] });
 
-// Horizontal Bar Chart for Workflow Time Analysis
-const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
+  // Display the total cost
+  document.getElementById('totalCostDisplay').innerText = `Total Cost: $${totalCost.toFixed(2)}`;
 
-// Create gradient fill for the bars
-const gradient = barChartCtx.createLinearGradient(0, 0, 0, barChartCtx.canvas.height);
-gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
-gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
+  // Horizontal Bar Chart for Workflow Time Analysis
+  const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
 
-// Detect theme
-const isDarkTheme = document.body.classList.contains('dark-theme');
-const textColor = isDarkTheme ? '#e0e0e0' : '#333333'; // Adjust text color based on theme
-const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+  const gradient = barChartCtx.createLinearGradient(0, 0, 0, barChartCtx.canvas.height);
+  gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
+  gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
 
-if (barChartInstance) barChartInstance.destroy(); // Clear existing chart
-barChartInstance = new Chart(barChartCtx, {
-  type: 'bar',
-  data: {
-    labels: sortedData.labels,
-    datasets: [{
-      label: 'Billable Time (minutes)',
-      data: sortedData.data,
-      backgroundColor: gradient,
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1,
-    }],
-  },
-  options: {
-    responsive: true,
-    indexAxis: 'y',
-    animation: {
-      duration: 1000,
+  // Detect theme
+  const isDarkTheme = document.body.classList.contains('dark-theme');
+  const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
+  const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+  if (barChartInstance) barChartInstance.destroy();
+  barChartInstance = new Chart(barChartCtx, {
+    type: 'bar',
+    data: {
+      labels: sortedData.labels,
+      datasets: [{
+        label: 'Billable Time (minutes)',
+        data: sortedData.data,
+        backgroundColor: gradient,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+      }],
     },
-    plugins: {
-      legend: {
-        display: false,
+    options: {
+      responsive: true,
+      indexAxis: 'y',
+      animation: {
+        duration: 1000,
       },
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            return `${context.dataset.label}: ${context.raw} minutes`;
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        beginAtZero: true,
-        ticks: {
-          color: textColor, // Use dynamic text color
-          font: {
-            size: 12,
-            weight: 'bold',
-          },
-        },
-        grid: {
-          color: gridColor, // Subtle grid lines based on theme
-        },
-      },
-      y: {
-        ticks: {
-          color: textColor, // Use dynamic text color
-          font: {
-            size: 12,
-            weight: 'bold',
-          },
-        },
-        grid: {
+      plugins: {
+        legend: {
           display: false,
         },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.dataset.label}: ${context.raw} minutes`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: {
+            color: textColor,
+            font: {
+              size: 12,
+              weight: 'bold',
+            },
+          },
+          grid: {
+            color: gridColor,
+          },
+        },
+        y: {
+          ticks: {
+            color: textColor,
+            font: {
+              size: 12,
+              weight: 'bold',
+            },
+          },
+          grid: {
+            display: false,
+          },
+        },
       },
     },
-  },
-});
+  });
 }
 
 // Load Daily Runtime Trend chart
@@ -136,72 +147,80 @@ async function loadTrendChart() {
   // Wait for the canvas to be fully visible before rendering
   const trendChartCanvas = document.getElementById('trendChart');
 
-  if (trendChartInstance) trendChartInstance.destroy(); // Clear existing chart
+  if (trendChartInstance) trendChartInstance.destroy();
 
   // Use a timeout to ensure rendering after visibility
-// Use a timeout to ensure rendering after visibility
-setTimeout(() => {
-  const trendChartCtx = trendChartCanvas.getContext('2d');
+  setTimeout(() => {
+    const trendChartCtx = trendChartCanvas.getContext('2d');
 
-  // Detect theme
-  const isDarkTheme = document.body.classList.contains('dark-theme');
-  const textColor = isDarkTheme ? '#e0e0e0' : '#333333'; // Adjust text color based on theme
-  const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    // Detect theme
+    const isDarkTheme = document.body.classList.contains('dark-theme');
+    const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
+    const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
 
-  // Create gradient fill
-  const gradient = trendChartCtx.createLinearGradient(0, 0, 0, trendChartCanvas.clientHeight);
-  gradient.addColorStop(0, 'rgba(75, 192, 192, 0.7)'); // Top color
-  gradient.addColorStop(1, 'rgba(75, 192, 192, 0)');   // Transparent bottom
+    // Filter out OS-specific data and create datasets dynamically
+    const datasets = [];
+    const osColors = {
+      Ubuntu: 'rgba(75, 192, 192, 0.7)',
+      Windows: 'rgba(54, 162, 235, 0.7)',
+      MacOS: 'rgba(255, 99, 132, 0.7)'
+    };
 
-  if (trendChartInstance) trendChartInstance.destroy(); // Clear existing chart
-  trendChartInstance = new Chart(trendChartCtx, {
-    type: 'line',
-    data: {
-      labels: trendData.map(item => item.date),
-      datasets: [{
-        label: 'Daily Runtime Trend (minutes)',
-        data: trendData.map(item => item.totalMinutes),
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 2,
-        fill: true,
-        backgroundColor: gradient, // Apply gradient fill
-        tension: 0.4, // Smooth curves
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              return `${context.raw} minutes`;
+    Object.keys(osColors).forEach(os => {
+      const osData = trendData.map(item => item[os] || 0);
+      if (osData.some(value => value > 0)) {
+        datasets.push({
+          label: os,
+          data: osData,
+          borderColor: osColors[os].replace(/0\.7/, '1'),
+          borderWidth: 2,
+          fill: true,
+          backgroundColor: trendChartCtx.createLinearGradient(0, 0, 0, trendChartCanvas.clientHeight).addColorStop(0, osColors[os]),
+          tension: 0.2,
+        });
+      }
+    });
+
+    trendChartInstance = new Chart(trendChartCtx, {
+      type: 'line',
+      data: {
+        labels: trendData.map(item => item.date),
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `${context.dataset.label}: ${context.raw} minutes`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: textColor,
+              maxTicksLimit: 7, // Limit x-axis labels
+            },
+          },
+          y: {
+            grid: {
+              color: gridColor,
+            },
+            ticks: {
+              beginAtZero: true,
+              color: textColor,
             },
           },
         },
       },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: {
-            color: textColor, // Use dynamic text color
-            maxTicksLimit: 7, // Limit x-axis labels
-          },
-        },
-        y: {
-          grid: {
-            color: gridColor, // Subtle grid lines based on theme
-          },
-          ticks: {
-            beginAtZero: true,
-            color: textColor, // Use dynamic text color
-          },
-        },
-      },
-    },
-  });
-}, 100); // Delay slightly to ensure proper rendering
+    });
+  }, 100); // Delay slightly to ensure proper rendering
 }
 
 async function loadFailures() {

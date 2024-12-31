@@ -448,3 +448,13 @@ body.dark-theme .last-updated {
 .github-button:hover {
   background-color: #333333;
 }
+
+.cost-display {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: rgba(75, 192, 192, 1);
+}
+body.dark-theme .cost-display {
+  color: rgba(75, 192, 192, 0.7);
+}
