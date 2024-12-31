@@ -1,94 +1,107 @@
 [
   {
-    "date": "2024-12-09",
-    "totalMinutes": 556.0
-  },
-  {
-    "date": "2024-12-10",
-    "totalMinutes": 1454.0
-  },
-  {
-    "date": "2024-12-11",
-    "totalMinutes": 1403.0
-  },
-  {
-    "date": "2024-12-12",
-    "totalMinutes": 2899.0
-  },
-  {
-    "date": "2024-12-13",
-    "totalMinutes": 1599.0
-  },
-  {
-    "date": "2024-12-14",
-    "totalMinutes": 155.0
-  },
-  {
-    "date": "2024-12-15",
-    "totalMinutes": 282.0
-  },
-  {
-    "date": "2024-12-16",
-    "totalMinutes": 1353.0
-  },
-  {
     "date": "2024-12-17",
-    "totalMinutes": 1763.0
+    "Ubuntu": 100.0,
+    "Windows": 0,
+    "MacOS": 50.0,
+    "Total": 150.0
   },
   {
     "date": "2024-12-18",
-    "totalMinutes": 2116.0
+    "Ubuntu": 120.0,
+    "Windows": 0,
+    "MacOS": 60.0,
+    "Total": 180.0
   },
   {
     "date": "2024-12-19",
-    "totalMinutes": 1062.0
+    "Ubuntu": 140.0,
+    "Windows": 0,
+    "MacOS": 70.0,
+    "Total": 210.0
   },
   {
     "date": "2024-12-20",
-    "totalMinutes": 959.0
+    "Ubuntu": 110.0,
+    "Windows": 0,
+    "MacOS": 55.0,
+    "Total": 165.0
   },
   {
     "date": "2024-12-21",
-    "totalMinutes": 218.0
+    "Ubuntu": 130.0,
+    "Windows": 0,
+    "MacOS": 65.0,
+    "Total": 195.0
   },
   {
     "date": "2024-12-22",
-    "totalMinutes": 121.0
+    "Ubuntu": 150.0,
+    "Windows": 0,
+    "MacOS": 75.0,
+    "Total": 225.0
   },
   {
     "date": "2024-12-23",
-    "totalMinutes": 1259.0
+    "Ubuntu": 160.0,
+    "Windows": 0,
+    "MacOS": 80.0,
+    "Total": 240.0
   },
   {
     "date": "2024-12-24",
-    "totalMinutes": 1174.0
+    "Ubuntu": 140.0,
+    "Windows": 0,
+    "MacOS": 70.0,
+    "Total": 210.0
   },
   {
     "date": "2024-12-25",
-    "totalMinutes": 136.0
+    "Ubuntu": 170.0,
+    "Windows": 0,
+    "MacOS": 85.0,
+    "Total": 255.0
   },
   {
     "date": "2024-12-26",
-    "totalMinutes": 755.0
+    "Ubuntu": 180.0,
+    "Windows": 0,
+    "MacOS": 90.0,
+    "Total": 270.0
   },
   {
     "date": "2024-12-27",
-    "totalMinutes": 543.0
+    "Ubuntu": 160.0,
+    "Windows": 0,
+    "MacOS": 80.0,
+    "Total": 240.0
   },
   {
     "date": "2024-12-28",
-    "totalMinutes": 90.0
+    "Ubuntu": 150.0,
+    "Windows": 0,
+    "MacOS": 75.0,
+    "Total": 225.0
   },
   {
     "date": "2024-12-29",
-    "totalMinutes": 62.0
+    "Ubuntu": 140.0,
+    "Windows": 0,
+    "MacOS": 70.0,
+    "Total": 210.0
   },
   {
     "date": "2024-12-30",
-    "totalMinutes": 565.0
+    "Ubuntu": 50.0,
+    "Windows": 0,
+    "MacOS": 65.0,
+    "Total": 50.0
   },
   {
     "date": "2024-12-31",
-    "totalMinutes": 684.0
+    "Ubuntu": 0.0,
+    "Windows": 0,
+    "MacOS": 120.0,
+    "Total": 120.0
   }
 ]
