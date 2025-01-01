@@ -411,15 +411,16 @@ body.dark-theme .header {
 
 
 /* Last Updated */
-.last-updated {
-  font-size: 14px;
-  font-weight: bold;
-  margin-right: 15px;
-  color: #333;
+footer {
+  display: flex;
+  justify-content: flex-end; /* Push content to the right */
+  padding: 10px 20px; /* Add padding for spacing */
+  background-color: transparent; /* Optional: match the background theme */
 }
 
-body.dark-theme .last-updated {
-  color: #e0e0e0;
+.last-updated {
+  font-size: 14px;
+  color: inherit; /* Maintain color based on theme */
 }
 
 /* GitHub Button */
