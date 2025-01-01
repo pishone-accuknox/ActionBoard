@@ -167,6 +167,9 @@ async def process_repository(repo, org_name, session, time_limit):
         else:
             run_data["total_time_minutes"] = 0
             workflow_runs_data.append(run_data)
+        global latest_run_time
+        latest_run_time = max(latest_run_time, run["created_at"]) if "latest_run_time" in globals() else run["created_at"]
+
 
 def validate_and_save_daily_trend():
     """Validate and save the daily trend data, merging with existing data."""
@@ -240,8 +243,7 @@ async def main():
     save_data("data/processed_run_ids.json", list(processed_run_ids))
 
     # Update the latest processed time
-    if workflow_runs_data:
-        latest_run_time = max(run["created_at"] for run in workflow_runs_data)
+    if "latest_run_time" in globals():
         save_last_processed_time(latest_run_time)
 
     print(f"Remaining API calls: {remaining_api_calls}")
