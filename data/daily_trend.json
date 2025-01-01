@@ -99,16 +99,16 @@
   },
   {
     "date": "2024-12-31",
-    "Ubuntu": 445.0,
+    "Ubuntu": 504.0,
     "Windows": 0,
     "MacOS": 120.0,
-    "Total": 565.0
+    "Total": 624.0
   },
   {
     "date": "2025-01-01",
-    "Ubuntu": 429.0,
+    "Ubuntu": 542.0,
     "Windows": 0,
     "MacOS": 0,
-    "Total": 429.0
+    "Total": 542.0
   }
 ]
