@@ -31435,5 +31435,932 @@
     "created_at": "2024-12-31T09:23:45Z",
     "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12557876106",
     "total_time_minutes": 17.0
+  },
+  {
+    "repo": "frontend-toolkit",
+    "workflow_name": "saas-reports Workflow",
+    "run_id": 12577882429,
+    "status": "success",
+    "created_at": "2025-01-02T05:13:09Z",
+    "html_url": "https://github.com/accuknox/frontend-toolkit/actions/runs/12577882429",
+    "total_time_minutes": 20.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "stage",
+    "run_id": 12579431539,
+    "status": "success",
+    "created_at": "2025-01-02T08:12:12Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12579431539",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "divy Workflow",
+    "run_id": 12578984936,
+    "status": "success",
+    "created_at": "2025-01-02T07:24:17Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12578984936",
+    "total_time_minutes": 9.0
+  },
+  {
+    "repo": "vulnerability-service",
+    "workflow_name": "vulnerability-service Workflow",
+    "run_id": 12578199369,
+    "status": "success",
+    "created_at": "2025-01-02T05:55:34Z",
+    "html_url": "https://github.com/accuknox/vulnerability-service/actions/runs/12578199369",
+    "total_time_minutes": 14.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12582295903,
+    "status": "failure",
+    "created_at": "2025-01-02T12:17:52Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12582295903",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12579369982,
+    "status": "success",
+    "created_at": "2025-01-02T08:06:43Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12579369982",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "data-pipeline-api",
+    "workflow_name": "data-pipeline-api Workflow",
+    "run_id": 12580046010,
+    "status": "success",
+    "created_at": "2025-01-02T09:08:43Z",
+    "html_url": "https://github.com/accuknox/data-pipeline-api/actions/runs/12580046010",
+    "total_time_minutes": 4.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CSPM - Prod",
+    "run_id": 12580731823,
+    "status": "success",
+    "created_at": "2025-01-02T10:06:19Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12580731823",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "deo",
+    "workflow_name": "deo Workflow",
+    "run_id": 12578237270,
+    "status": "success",
+    "created_at": "2025-01-02T06:01:23Z",
+    "html_url": "https://github.com/accuknox/deo/actions/runs/12578237270",
+    "total_time_minutes": 16.0
+  },
+  {
+    "repo": "dev2",
+    "workflow_name": "discovery engine Workflow",
+    "run_id": 12579912010,
+    "status": "success",
+    "created_at": "2025-01-02T08:57:27Z",
+    "html_url": "https://github.com/accuknox/dev2/actions/runs/12579912010",
+    "total_time_minutes": 3.0
+  },
+  {
+    "repo": "cluster-management-service",
+    "workflow_name": "cluster-management-service Workflow",
+    "run_id": 12578451004,
+    "status": "success",
+    "created_at": "2025-01-02T06:24:44Z",
+    "html_url": "https://github.com/accuknox/cluster-management-service/actions/runs/12578451004",
+    "total_time_minutes": 11.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "Release knoxctl",
+    "run_id": 12581932344,
+    "status": "success",
+    "created_at": "2025-01-02T11:46:43Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581932344",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "vm-adapter",
+    "workflow_name": "ci-systemd-release",
+    "run_id": 12577739874,
+    "status": "success",
+    "created_at": "2025-01-02T04:54:00Z",
+    "html_url": "https://github.com/accuknox/vm-adapter/actions/runs/12577739874",
+    "total_time_minutes": 5.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Development pipeline for TestCases in divy application",
+    "run_id": 12578984971,
+    "status": "success",
+    "created_at": "2025-01-02T07:24:17Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12578984971",
+    "total_time_minutes": 17.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12579393923,
+    "status": "success",
+    "created_at": "2025-01-02T08:08:46Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12579393923",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "development",
+    "run_id": 12579377046,
+    "status": "success",
+    "created_at": "2025-01-02T08:07:19Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12579377046",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12582111595,
+    "status": "success",
+    "created_at": "2025-01-02T12:03:27Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12582111595",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CSPM - Demo",
+    "run_id": 12580696771,
+    "status": "success",
+    "created_at": "2025-01-02T10:03:52Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12580696771",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12579354917,
+    "status": "success",
+    "created_at": "2025-01-02T08:05:29Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12579354917",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12582281014,
+    "status": "failure",
+    "created_at": "2025-01-02T12:16:37Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12582281014",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "deo",
+    "workflow_name": "deo Workflow",
+    "run_id": 12577319142,
+    "status": "success",
+    "created_at": "2025-01-02T03:56:34Z",
+    "html_url": "https://github.com/accuknox/deo/actions/runs/12577319142",
+    "total_time_minutes": 16.0
+  },
+  {
+    "repo": "dev2",
+    "workflow_name": "discovery engine Workflow",
+    "run_id": 12578536079,
+    "status": "success",
+    "created_at": "2025-01-02T06:34:11Z",
+    "html_url": "https://github.com/accuknox/dev2/actions/runs/12578536079",
+    "total_time_minutes": 11.0
+  },
+  {
+    "repo": "cluster-management-service",
+    "workflow_name": "cluster-management-service Workflow",
+    "run_id": 12578346108,
+    "status": "success",
+    "created_at": "2025-01-02T06:12:56Z",
+    "html_url": "https://github.com/accuknox/cluster-management-service/actions/runs/12578346108",
+    "total_time_minutes": 16.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12581925256,
+    "status": "failure",
+    "created_at": "2025-01-02T11:46:05Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581925256",
+    "total_time_minutes": 11.0
+  },
+  {
+    "repo": "vm-adapter",
+    "workflow_name": "build vm-adapter Workflow",
+    "run_id": 12577739873,
+    "status": "success",
+    "created_at": "2025-01-02T04:54:00Z",
+    "html_url": "https://github.com/accuknox/vm-adapter/actions/runs/12577739873",
+    "total_time_minutes": 29.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12579387273,
+    "status": "success",
+    "created_at": "2025-01-02T08:08:09Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12579387273",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "divy Workflow",
+    "run_id": 12578825206,
+    "status": "success",
+    "created_at": "2025-01-02T07:07:39Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12578825206",
+    "total_time_minutes": 9.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "development",
+    "run_id": 12579169588,
+    "status": "success",
+    "created_at": "2025-01-02T07:44:42Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12579169588",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12579962713,
+    "status": "success",
+    "created_at": "2025-01-02T09:02:14Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12579962713",
+    "total_time_minutes": 2.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12580240268,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T09:24:31Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12580240268",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Stage",
+    "run_id": 12577864768,
+    "status": "success",
+    "created_at": "2025-01-02T05:10:52Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12577864768",
+    "total_time_minutes": 16.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Trigger Deployment workflow",
+    "run_id": 12577700160,
+    "status": "failure",
+    "created_at": "2025-01-02T04:47:47Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577700160",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "deo",
+    "workflow_name": "deo Workflow",
+    "run_id": 12577276292,
+    "status": "success",
+    "created_at": "2025-01-02T03:48:55Z",
+    "html_url": "https://github.com/accuknox/deo/actions/runs/12577276292",
+    "total_time_minutes": 16.0
+  },
+  {
+    "repo": "cluster-management-service",
+    "workflow_name": "cluster-management-service Workflow",
+    "run_id": 12578296047,
+    "status": "failure",
+    "created_at": "2025-01-02T06:07:38Z",
+    "html_url": "https://github.com/accuknox/cluster-management-service/actions/runs/12578296047",
+    "total_time_minutes": 6.0
+  },
+  {
+    "repo": "dev2",
+    "workflow_name": "discovery engine Workflow",
+    "run_id": 12578031734,
+    "status": "success",
+    "created_at": "2025-01-02T05:31:59Z",
+    "html_url": "https://github.com/accuknox/dev2/actions/runs/12578031734",
+    "total_time_minutes": 11.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 12581925234,
+    "status": "success",
+    "created_at": "2025-01-02T11:46:05Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581925234",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 12579375372,
+    "status": "success",
+    "created_at": "2025-01-02T08:07:12Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12579375372",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Development pipeline for TestCases in divy application",
+    "run_id": 12578825193,
+    "status": "success",
+    "created_at": "2025-01-02T07:07:38Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12578825193",
+    "total_time_minutes": 17.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12578249484,
+    "status": "success",
+    "created_at": "2025-01-02T06:02:46Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12578249484",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "stage",
+    "run_id": 12578825382,
+    "status": "success",
+    "created_at": "2025-01-02T07:07:40Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12578825382",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12580229966,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T09:23:38Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12580229966",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Prod",
+    "run_id": 12577182422,
+    "status": "success",
+    "created_at": "2025-01-02T03:35:22Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12577182422",
+    "total_time_minutes": 11.0
+  },
+  {
+    "repo": "deo",
+    "workflow_name": "deo Workflow",
+    "run_id": 12577264798,
+    "status": "success",
+    "created_at": "2025-01-02T03:47:20Z",
+    "html_url": "https://github.com/accuknox/deo/actions/runs/12577264798",
+    "total_time_minutes": 15.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12577700158,
+    "status": "success",
+    "created_at": "2025-01-02T04:47:47Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577700158",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "Build knoxctl",
+    "run_id": 12581925235,
+    "status": "success",
+    "created_at": "2025-01-02T11:46:05Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581925235",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Development pipeline for TestCases in divy application",
+    "run_id": 12576233499,
+    "status": "success",
+    "created_at": "2025-01-02T01:29:26Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12576233499",
+    "total_time_minutes": 17.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12576934681,
+    "status": "success",
+    "created_at": "2025-01-02T03:04:52Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12576934681",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12580210448,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T09:21:59Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12580210448",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Demo",
+    "run_id": 12577182431,
+    "status": "success",
+    "created_at": "2025-01-02T03:35:22Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12577182431",
+    "total_time_minutes": 11.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "Checks",
+    "run_id": 12578477992,
+    "status": "success",
+    "created_at": "2025-01-02T06:27:36Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12578477992",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 xcitium",
+    "run_id": 12579337102,
+    "status": "success",
+    "created_at": "2025-01-02T08:03:52Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12579337102",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12577692961,
+    "status": "success",
+    "created_at": "2025-01-02T04:46:44Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577692961",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12581923927,
+    "status": "failure",
+    "created_at": "2025-01-02T11:45:57Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581923927",
+    "total_time_minutes": 4.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12575625199,
+    "status": "success",
+    "created_at": "2025-01-02T00:08:56Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12575625199",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Linting pipeline for divy application",
+    "run_id": 12576233491,
+    "status": "success",
+    "created_at": "2025-01-02T01:29:26Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12576233491",
+    "total_time_minutes": 5.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12579513818,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T08:20:09Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12579513818",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "Checks",
+    "run_id": 12578139720,
+    "status": "success",
+    "created_at": "2025-01-02T05:46:28Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12578139720",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 12576616444,
+    "status": "success",
+    "created_at": "2025-01-02T02:22:26Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12576616444",
+    "total_time_minutes": 2.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 12576437589,
+    "status": "success",
+    "created_at": "2025-01-02T01:57:58Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12576437589",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12577671634,
+    "status": "success",
+    "created_at": "2025-01-02T04:43:50Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577671634",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 12581899157,
+    "status": "success",
+    "created_at": "2025-01-02T11:43:37Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581899157",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12574354573,
+    "status": "success",
+    "created_at": "2025-01-01T21:01:59Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12574354573",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12579469327,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T08:15:53Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12579469327",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "divy Workflow",
+    "run_id": 12576233489,
+    "status": "success",
+    "created_at": "2025-01-02T01:29:26Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12576233489",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "stage",
+    "run_id": 12577704534,
+    "status": "success",
+    "created_at": "2025-01-02T04:48:29Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12577704534",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CSPM - Prod",
+    "run_id": 12569573293,
+    "status": "success",
+    "created_at": "2025-01-01T10:06:18Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12569573293",
+    "total_time_minutes": 14.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12575779253,
+    "status": "success",
+    "created_at": "2025-01-02T00:28:23Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12575779253",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Trigger Deployment workflow",
+    "run_id": 12577671631,
+    "status": "failure",
+    "created_at": "2025-01-02T04:43:50Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577671631",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12581899152,
+    "status": "failure",
+    "created_at": "2025-01-02T11:43:37Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581899152",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12573096799,
+    "status": "success",
+    "created_at": "2025-01-01T18:02:41Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12573096799",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12578718167,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T06:55:58Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12578718167",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Ensure PR titles follow the format \"[CNAPP-<ISSUE_NUMBER>] <ISSUE_TITLE>\"",
+    "run_id": 12576233490,
+    "status": "failure",
+    "created_at": "2025-01-02T01:29:26Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12576233490",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "development",
+    "run_id": 12577479789,
+    "status": "success",
+    "created_at": "2025-01-02T04:17:54Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12577479789",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CSPM - Demo",
+    "run_id": 12569548831,
+    "status": "success",
+    "created_at": "2025-01-01T10:03:38Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12569548831",
+    "total_time_minutes": 14.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12577663455,
+    "status": "success",
+    "created_at": "2025-01-02T04:42:51Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577663455",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12575772322,
+    "status": "success",
+    "created_at": "2025-01-02T00:27:34Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12575772322",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "Build knoxctl",
+    "run_id": 12581899159,
+    "status": "success",
+    "created_at": "2025-01-02T11:43:37Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581899159",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12571798842,
+    "status": "success",
+    "created_at": "2025-01-01T15:01:56Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12571798842",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12578497404,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T06:29:36Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12578497404",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "Checks",
+    "run_id": 12577464467,
+    "status": "success",
+    "created_at": "2025-01-02T04:15:55Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12577464467",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Stage",
+    "run_id": 12566845516,
+    "status": "success",
+    "created_at": "2025-01-01T03:40:52Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12566845516",
+    "total_time_minutes": 33.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 12575743614,
+    "status": "success",
+    "created_at": "2025-01-02T00:24:05Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12575743614",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Trigger Deployment workflow",
+    "run_id": 12577657662,
+    "status": "failure",
+    "created_at": "2025-01-02T04:41:57Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577657662",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12577861889,
+    "status": "failure",
+    "created_at": "2025-01-02T05:10:33Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12577861889",
+    "total_time_minutes": 15.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12570408081,
+    "status": "success",
+    "created_at": "2025-01-01T12:03:09Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12570408081",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12578495161,
+    "status": "startup_failure",
+    "created_at": "2025-01-02T06:29:22Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12578495161",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Demo",
+    "run_id": 12566830212,
+    "status": "success",
+    "created_at": "2025-01-01T03:38:59Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12566830212",
+    "total_time_minutes": 13.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 xcitium",
+    "run_id": 12575655095,
+    "status": "success",
+    "created_at": "2025-01-02T00:12:52Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12575655095",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Validate Helm Charts",
+    "run_id": 12577657660,
+    "status": "success",
+    "created_at": "2025-01-02T04:41:57Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577657660",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12569091950,
+    "status": "success",
+    "created_at": "2025-01-01T09:02:10Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12569091950",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 12575575658,
+    "status": "success",
+    "created_at": "2025-01-02T00:02:29Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12575575658",
+    "total_time_minutes": 67.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Prod",
+    "run_id": 12566828226,
+    "status": "success",
+    "created_at": "2025-01-01T03:38:41Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12566828226",
+    "total_time_minutes": 12.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12572288702,
+    "status": "success",
+    "created_at": "2025-01-01T16:07:12Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12572288702",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12567800658,
+    "status": "success",
+    "created_at": "2025-01-01T06:02:50Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12567800658",
+    "total_time_minutes": 2.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12572284719,
+    "status": "success",
+    "created_at": "2025-01-01T16:06:47Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12572284719",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 12566281254,
+    "status": "success",
+    "created_at": "2025-01-01T02:26:39Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12566281254",
+    "total_time_minutes": 2.0
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12566603693,
+    "status": "success",
+    "created_at": "2025-01-01T03:10:32Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12566603693",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 12572277699,
+    "status": "success",
+    "created_at": "2025-01-01T16:05:57Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12572277699",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 xcitium",
+    "run_id": 12572252853,
+    "status": "success",
+    "created_at": "2025-01-01T16:03:05Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12572252853",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12568701916,
+    "status": "success",
+    "created_at": "2025-01-01T08:08:45Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12568701916",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 Prod",
+    "run_id": 12568698271,
+    "status": "success",
+    "created_at": "2025-01-01T08:08:25Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12568698271",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 12568688227,
+    "status": "success",
+    "created_at": "2025-01-01T08:07:07Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12568688227",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 xcitium",
+    "run_id": 12568660275,
+    "status": "success",
+    "created_at": "2025-01-01T08:03:47Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12568660275",
+    "total_time_minutes": 0.0
   }
 ]

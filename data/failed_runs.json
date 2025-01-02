@@ -4471,5 +4471,104 @@
     "created_at": "2024-12-31T07:42:21Z",
     "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12556963608",
     "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12582295903,
+    "status": "failure",
+    "created_at": "2025-01-02T12:17:52Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12582295903",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12582281014,
+    "status": "failure",
+    "created_at": "2025-01-02T12:16:37Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12582281014",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12581925256,
+    "status": "failure",
+    "created_at": "2025-01-02T11:46:05Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581925256",
+    "total_time_minutes": 11.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Trigger Deployment workflow",
+    "run_id": 12577700160,
+    "status": "failure",
+    "created_at": "2025-01-02T04:47:47Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577700160",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "cluster-management-service",
+    "workflow_name": "cluster-management-service Workflow",
+    "run_id": 12578296047,
+    "status": "failure",
+    "created_at": "2025-01-02T06:07:38Z",
+    "html_url": "https://github.com/accuknox/cluster-management-service/actions/runs/12578296047",
+    "total_time_minutes": 6.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12581923927,
+    "status": "failure",
+    "created_at": "2025-01-02T11:45:57Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581923927",
+    "total_time_minutes": 4.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Trigger Deployment workflow",
+    "run_id": 12577671631,
+    "status": "failure",
+    "created_at": "2025-01-02T04:43:50Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577671631",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12581899152,
+    "status": "failure",
+    "created_at": "2025-01-02T11:43:37Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12581899152",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Ensure PR titles follow the format \"[CNAPP-<ISSUE_NUMBER>] <ISSUE_TITLE>\"",
+    "run_id": 12576233490,
+    "status": "failure",
+    "created_at": "2025-01-02T01:29:26Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12576233490",
+    "total_time_minutes": 0.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Trigger Deployment workflow",
+    "run_id": 12577657662,
+    "status": "failure",
+    "created_at": "2025-01-02T04:41:57Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12577657662",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12577861889,
+    "status": "failure",
+    "created_at": "2025-01-02T05:10:33Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12577861889",
+    "total_time_minutes": 15.0
   }
 ]
