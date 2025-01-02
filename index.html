@@ -48,9 +48,28 @@
       <label for="dateRange">Date Range:</label>
       <input type="text" id="dateRange" placeholder="Select date range">
     </div>
-    <div id="totalCostDisplay" class="cost-display">
-      Total Cost: $0.00
-    </div>
+    <div class="widgets-container">
+      <!-- Widget for Total Cost -->
+      <div class="widget glassmorphism" id="totalCostWidget">
+        <h3>Total Cost</h3>
+        <p id="totalCost">$0.00</p>
+      </div>
+    
+      <!-- Widget for Self-hosted Runner Time -->
+      <div class="widget glassmorphism" id="topWorkflowsWidget">
+        <h3>Self-hosted Runner Time</h3>
+        <ul id="topWorkflowsList">
+          <li>No data available</li>
+        </ul>
+      </div>
+    
+      <!-- Widget for Number of Repositories -->
+      <div class="widget glassmorphism" id="repoCountWidget">
+        <h3>No. of Repositories</h3>
+        <p id="repoCount">0</p>
+      </div>
+    </div>    
+    
     <div class="chart-container">
       <canvas id="workflowBarChart"></canvas>
     </div>    

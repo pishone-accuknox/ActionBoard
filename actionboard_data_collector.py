@@ -232,6 +232,10 @@ async def main():
         if not repositories:
             print("No repositories found for the organization.")
             return
+        
+        # Save the repository count for the widget
+        repo_count = len(repositories)
+        save_data("data/repo_count.json", {"repo_count": repo_count})
 
         print(f"Processing {len(repositories)} repositories...")
         tasks = [process_repository(repo, ORG_NAME, session, TIME_LIMIT) for repo in repositories]
@@ -240,14 +244,11 @@ async def main():
         for task in tqdm_asyncio.as_completed(tasks, total=len(repositories)):
             await task
 
-    # Save all updated data back to files
     save_data("data/workflow_runs.json", workflow_runs_data)
     save_data("data/failed_runs.json", failed_runs_data)
 
-    # Validate and save the daily trend data
     validate_and_save_daily_trend()
 
-    # Save the processed run IDs for future runs
     save_data("data/processed_run_ids.json", list(processed_run_ids))
 
     # Update the latest processed time

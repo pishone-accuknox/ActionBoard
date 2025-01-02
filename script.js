@@ -28,116 +28,145 @@ function showTab(tabId) {
 }
 
 async function loadTimeAnalysis() {
-  const workflowData = await fetchData('data/workflow_runs.json');
+  try {
+    const dailyTrendData = await fetchData('data/daily_trend.json');
+    const workflowData = await fetchData('data/workflow_runs.json');
+    const repoCountData = await fetchData('data/repo_count.json');
 
-  const COST_PER_MINUTE = {
-    UBUNTU: 0.008,
-    WINDOWS: 0.016,
-    MACOS: 0.08
-  };
-  let totalCost = 0;
+    const COST_PER_MINUTE = {
+      UBUNTU: 0.008,
+      WINDOWS: 0.016,
+      MACOS: 0.08,
+    };
 
-  const fromDate = new Date(document.getElementById('fromDate').value);
-  const toDate = new Date(document.getElementById('toDate').value);
+    // Normalize input dates to UTC midnight
+    const normalizeToUTC = (date) => new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
 
-  // Filter workflow data by date range and calculate costs
-  const aggregatedData = workflowData.reduce((acc, run) => {
-    const runDate = new Date(run.created_at.split("T")[0]);
-    if (runDate >= fromDate && runDate <= toDate && run.total_time_minutes > 0) {
-      const key = `${run.repo} - ${run.workflow_name}`;
-      acc[key] = (acc[key] || 0) + run.total_time_minutes;
+    const fromDate = normalizeToUTC(new Date(document.getElementById('fromDate').value));
+    const toDate = normalizeToUTC(new Date(document.getElementById('toDate').value));
 
-      // Calculate cost for this run
-      if (run.os && COST_PER_MINUTE[run.os]) {
-        totalCost += run.total_time_minutes * COST_PER_MINUTE[run.os];
-      }
+    // Validate date range
+    if (isNaN(fromDate) || isNaN(toDate)) {
+      console.error('Invalid date range:', fromDate, toDate);
+      return;
     }
-    return acc;
-  }, {});
 
-  const sortedData = Object.entries(aggregatedData)
-    .sort(([, a], [, b]) => b - a)
-    .reduce((acc, [key, value]) => {
-      acc.labels.push(key);
-      acc.data.push(value);
+    let totalCost = 0;
+    let selfHostedTime = 0;
+    const aggregatedData = {
+      labels: [],
+      data: [],
+    };
+
+    // Process daily trend data for widgets
+    dailyTrendData.forEach((entry) => {
+      const entryDate = normalizeToUTC(new Date(entry.date));
+      if (entryDate >= fromDate && entryDate <= toDate) {
+        selfHostedTime += entry['Self-hosted'] || 0;
+
+        // Calculate cost from Total time
+        const totalTime = entry['Total'] || 0;
+        totalCost += totalTime * COST_PER_MINUTE.UBUNTU; // Default to Ubuntu
+      }
+    });
+
+    // Process workflow data for the graph
+    const workflowAggregated = workflowData.reduce((acc, run) => {
+      const runDate = normalizeToUTC(new Date(run.created_at.split('T')[0]));
+      if (runDate >= fromDate && runDate <= toDate && run.total_time_minutes > 0) {
+        const key = `${run.repo} - ${run.workflow_name}`;
+        acc[key] = (acc[key] || 0) + run.total_time_minutes;
+      }
       return acc;
-    }, { labels: [], data: [] });
+    }, {});
 
-  // Display the total cost
-  document.getElementById('totalCostDisplay').innerText = `Total Cost: $${totalCost.toFixed(2)}`;
+    const sortedWorkflowData = Object.entries(workflowAggregated)
+      .sort(([, a], [, b]) => b - a)
+      .reduce(
+        (acc, [key, value]) => {
+          acc.labels.push(key);
+          acc.data.push(value);
+          return acc;
+        },
+        { labels: [], data: [] }
+      );
 
-  // Horizontal Bar Chart for Workflow Time Analysis
-  const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
+    // Fetch repository count
+    const repoCount = repoCountData.repo_count || 0;
 
-  const gradient = barChartCtx.createLinearGradient(0, 0, 0, barChartCtx.canvas.height);
-  gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
-  gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
+    // Update widgets
+    document.getElementById('totalCost').innerText = `$${totalCost.toFixed(2)}`;
+    document.getElementById('topWorkflowsList').innerHTML = `<li>${selfHostedTime.toFixed(2)} minutes</li>`;
+    document.getElementById('repoCount').innerText = repoCount;
 
-  // Detect theme
-  const isDarkTheme = document.body.classList.contains('dark-theme');
-  const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
-  const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    // Chart Logic
+    const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
+    const gradient = barChartCtx.createLinearGradient(0, 0, 0, barChartCtx.canvas.height);
+    gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
+    gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
 
-  if (barChartInstance) barChartInstance.destroy();
-  barChartInstance = new Chart(barChartCtx, {
-    type: 'bar',
-    data: {
-      labels: sortedData.labels,
-      datasets: [{
-        label: 'Billable Time (minutes)',
-        data: sortedData.data,
-        backgroundColor: gradient,
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      }],
-    },
-    options: {
-      responsive: true,
-      indexAxis: 'y',
-      animation: {
-        duration: 1000,
+    const isDarkTheme = document.body.classList.contains('dark-theme');
+    const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
+    const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+    if (window.barChartInstance) window.barChartInstance.destroy();
+
+    window.barChartInstance = new Chart(barChartCtx, {
+      type: 'bar',
+      data: {
+        labels: sortedWorkflowData.labels,
+        datasets: [{
+          label: 'Billable Time (minutes)',
+          data: sortedWorkflowData.data,
+          backgroundColor: gradient,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        }],
       },
-      plugins: {
-        legend: {
-          display: false,
+      options: {
+        responsive: true,
+        indexAxis: 'y',
+        animation: {
+          duration: 1000,
         },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              return `${context.dataset.label}: ${context.raw} minutes`;
-            },
-          },
-        },
-      },
-      scales: {
-        x: {
-          beginAtZero: true,
-          ticks: {
-            color: textColor,
-            font: {
-              size: 12,
-              weight: 'bold',
-            },
-          },
-          grid: {
-            color: gridColor,
-          },
-        },
-        y: {
-          ticks: {
-            color: textColor,
-            font: {
-              size: 12,
-              weight: 'bold',
-            },
-          },
-          grid: {
+        plugins: {
+          legend: {
             display: false,
           },
         },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: {
+              color: textColor,
+              font: {
+                size: 12,
+                weight: 'bold',
+              },
+            },
+            grid: {
+              color: gridColor,
+            },
+          },
+          y: {
+            ticks: {
+              color: textColor,
+              font: {
+                size: 12,
+                weight: 'bold',
+              },
+            },
+            grid: {
+              display: false,
+            },
+          },
+        },
       },
-    },
-  });
+    });
+
+  } catch (error) {
+    console.error('Error loading time analysis:', error);
+  }
 }
 
 // Load Daily Runtime Trend chart
