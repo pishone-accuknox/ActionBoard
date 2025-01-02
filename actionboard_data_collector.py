@@ -48,8 +48,12 @@ def load_existing_data(file_path, expected_type=dict):
 
 def save_data(file_path, data):
     """Save data to a file."""
-    with open(file_path, "w") as f:
-        json.dump(data, f, indent=2)
+    try:
+        with open(file_path, "w") as f:
+            json.dump(data, f, indent=2)
+    except Exception as e:
+        print(f"Error saving data to {file_path}: {e}")
+
 
 async def fetch_all_pages(session, url, key=None):
     """
@@ -125,7 +129,7 @@ async def fetch_workflow_runs(repo_name, owner, session, time_limit):
 
 async def process_repository(repo, org_name, session, time_limit):
     """Process a single repository to fetch workflow runs and timing data."""
-    global processed_run_ids
+    global workflow_runs_data, failed_runs_data, daily_usage_data, processed_run_ids
 
     repo_name = repo["name"]
     runs = await fetch_workflow_runs(repo_name, org_name, session, time_limit)
@@ -138,7 +142,7 @@ async def process_repository(repo, org_name, session, time_limit):
         created_date = run["created_at"][:10]
 
         if created_date not in daily_usage_data:
-            daily_usage_data[created_date] = {"Ubuntu": 0, "Windows": 0, "MacOS": 0, "Total": 0}
+            daily_usage_data[created_date] = {"Ubuntu": 0, "Windows": 0, "MacOS": 0, "Self-hosted": 0, "Total": 0}
 
         run_data = {
             "repo": repo_name,
@@ -167,8 +171,6 @@ async def process_repository(repo, org_name, session, time_limit):
         else:
             run_data["total_time_minutes"] = 0
             workflow_runs_data.append(run_data)
-        global latest_run_time
-        latest_run_time = max(latest_run_time, run["created_at"]) if "latest_run_time" in globals() else run["created_at"]
 
 
 def validate_and_save_daily_trend():
@@ -180,14 +182,18 @@ def validate_and_save_daily_trend():
         entry["date"]: entry for entry in existing_data
     }
 
-    # Merge daily_usage_data into existing_data_dict
-    for date, usage in daily_usage_data.items():
+    # Update only with new data
+    for date, new_usage in daily_usage_data.items():
         if date in existing_data_dict:
-            # Add new values to the existing ones
-            for os in ["Ubuntu", "Windows", "MacOS", "Total"]:
-                existing_data_dict[date][os] += usage.get(os, 0)
+            # Add only the new data to existing values
+            for os in ["Ubuntu", "Windows", "MacOS", "Self-hosted", "Total"]:
+                existing_data_dict[date][os] = (
+                    existing_data_dict[date].get(os, 0) +
+                    max(0, new_usage.get(os, 0) - existing_data_dict[date].get(os, 0))
+                )
         else:
-            existing_data_dict[date] = {"date": date, **usage}
+            # Add a new date entry
+            existing_data_dict[date] = {"date": date, **new_usage}
 
     # Sort and convert the merged data back to a list
     validated_daily_trend = [
@@ -207,6 +213,8 @@ async def main():
         return
 
     # Load existing data from files
+    global workflow_runs_data, failed_runs_data, daily_usage_data, processed_run_ids
+
     workflow_runs_data = load_existing_data("data/workflow_runs.json", expected_type=list)
     failed_runs_data = load_existing_data("data/failed_runs.json", expected_type=list)
     daily_usage_data = load_existing_data("data/daily_trend.json", expected_type=dict)
@@ -243,7 +251,9 @@ async def main():
     save_data("data/processed_run_ids.json", list(processed_run_ids))
 
     # Update the latest processed time
-    if "latest_run_time" in globals():
+    if workflow_runs_data:
+        latest_run_time = max(run["created_at"] for run in workflow_runs_data)
+        print(f"DEBUG: Saving latest processed time: {latest_run_time}")
         save_last_processed_time(latest_run_time)
 
     print(f"Remaining API calls: {remaining_api_calls}")
