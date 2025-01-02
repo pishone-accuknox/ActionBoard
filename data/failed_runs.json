@@ -4570,5 +4570,14 @@
     "created_at": "2025-01-02T05:10:33Z",
     "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12577861889",
     "total_time_minutes": 15.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12582376814,
+    "status": "failure",
+    "created_at": "2025-01-02T12:24:20Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12582376814",
+    "total_time_minutes": 1.0
   }
 ]
