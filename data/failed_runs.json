@@ -4858,5 +4858,41 @@
     "created_at": "2025-01-03T07:49:59Z",
     "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12594521955",
     "total_time_minutes": 5.0
+  },
+  {
+    "repo": "cluster-management-service",
+    "workflow_name": "cluster-management-service Workflow",
+    "run_id": 12595937253,
+    "status": "failure",
+    "created_at": "2025-01-03T09:58:34Z",
+    "html_url": "https://github.com/accuknox/cluster-management-service/actions/runs/12595937253",
+    "total_time_minutes": 5.0
+  },
+  {
+    "repo": "Feeder-service",
+    "workflow_name": "Feeder-service Workflow",
+    "run_id": 12597382357,
+    "status": "failure",
+    "created_at": "2025-01-03T12:02:53Z",
+    "html_url": "https://github.com/accuknox/Feeder-service/actions/runs/12597382357",
+    "total_time_minutes": 5.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Docker Build and Push For K8s Job",
+    "run_id": 12597035127,
+    "status": "failure",
+    "created_at": "2025-01-03T11:29:23Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12597035127",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "divy-backend",
+    "workflow_name": "Docker Build and Push For K8s Job",
+    "run_id": 12596966519,
+    "status": "failure",
+    "created_at": "2025-01-03T11:23:23Z",
+    "html_url": "https://github.com/accuknox/divy-backend/actions/runs/12596966519",
+    "total_time_minutes": 1.0
   }
 ]
