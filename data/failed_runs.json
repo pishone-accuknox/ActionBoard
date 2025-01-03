@@ -4633,5 +4633,23 @@
     "created_at": "2025-01-02T17:19:10Z",
     "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12586164349",
     "total_time_minutes": 4.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12592256463,
+    "status": "failure",
+    "created_at": "2025-01-03T03:24:00Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12592256463",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12592224642,
+    "status": "failure",
+    "created_at": "2025-01-03T03:20:22Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12592224642",
+    "total_time_minutes": 1.0
   }
 ]
