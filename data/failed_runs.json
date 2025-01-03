@@ -4651,5 +4651,131 @@
     "created_at": "2025-01-03T03:20:22Z",
     "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12592224642",
     "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-cli-v2",
+    "workflow_name": "PR Checks",
+    "run_id": 12593005690,
+    "status": "failure",
+    "created_at": "2025-01-03T05:00:25Z",
+    "html_url": "https://github.com/accuknox/accuknox-cli-v2/actions/runs/12593005690",
+    "total_time_minutes": 15.0
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Lint",
+    "run_id": 12593734786,
+    "status": "failure",
+    "created_at": "2025-01-03T06:25:47Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12593734786",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12593548231,
+    "status": "failure",
+    "created_at": "2025-01-03T06:06:23Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12593548231",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "Helm-charts",
+    "workflow_name": "Trigger Deployment workflow",
+    "run_id": 12592971230,
+    "status": "failure",
+    "created_at": "2025-01-03T04:54:52Z",
+    "html_url": "https://github.com/accuknox/Helm-charts/actions/runs/12592971230",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "cluster-management-service",
+    "workflow_name": "cluster-management-service Workflow",
+    "run_id": 12592330273,
+    "status": "failure",
+    "created_at": "2025-01-03T03:32:16Z",
+    "html_url": "https://github.com/accuknox/cluster-management-service/actions/runs/12592330273",
+    "total_time_minutes": 6.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12593489008,
+    "status": "failure",
+    "created_at": "2025-01-03T06:00:32Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12593489008",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12593445024,
+    "status": "failure",
+    "created_at": "2025-01-03T05:53:36Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12593445024",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "vm-adapter",
+    "workflow_name": "build vm-adapter Workflow",
+    "run_id": 12592940803,
+    "status": "failure",
+    "created_at": "2025-01-03T04:50:24Z",
+    "html_url": "https://github.com/accuknox/vm-adapter/actions/runs/12592940803",
+    "total_time_minutes": 3.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12593432006,
+    "status": "failure",
+    "created_at": "2025-01-03T05:51:42Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12593432006",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "vm-adapter",
+    "workflow_name": "build vm-adapter Workflow",
+    "run_id": 12592834665,
+    "status": "failure",
+    "created_at": "2025-01-03T04:36:31Z",
+    "html_url": "https://github.com/accuknox/vm-adapter/actions/runs/12592834665",
+    "total_time_minutes": 2.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12593410278,
+    "status": "failure",
+    "created_at": "2025-01-03T05:48:46Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12593410278",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12593392530,
+    "status": "failure",
+    "created_at": "2025-01-03T05:46:24Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12593392530",
+    "total_time_minutes": 1.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12592303267,
+    "status": "failure",
+    "created_at": "2025-01-03T03:29:18Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12592303267",
+    "total_time_minutes": 3.0
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12592291490,
+    "status": "failure",
+    "created_at": "2025-01-03T03:27:55Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12592291490",
+    "total_time_minutes": 4.0
   }
 ]
