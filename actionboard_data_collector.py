@@ -186,7 +186,7 @@ def validate_and_save_daily_trend():
     for date, new_usage in daily_usage_data.items():
         if date in existing_data_dict:
             # Add only the new data to existing values
-            for os in ["Ubuntu", "Windows", "MacOS", "Self-hosted", "Total"]:
+            for os in ["Ubuntu", "Windows", "MacOS", "Self-hosted"]:
                 existing_data_dict[date][os] = (
                     existing_data_dict[date].get(os, 0) +
                     max(0, new_usage.get(os, 0) - existing_data_dict[date].get(os, 0))
@@ -194,6 +194,12 @@ def validate_and_save_daily_trend():
         else:
             # Add a new date entry
             existing_data_dict[date] = {"date": date, **new_usage}
+
+        # Recalculate Total excluding Self-hosted
+        existing_data_dict[date]["Total"] = sum(
+            existing_data_dict[date].get(os, 0)
+            for os in ["Ubuntu", "Windows", "MacOS"]
+        )
 
     # Sort and convert the merged data back to a list
     validated_daily_trend = [
