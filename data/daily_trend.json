@@ -1,5 +1,77 @@
 [
   {
+    "date": "2024-12-26",
+    "Ubuntu": 755.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 176.01999999999998,
+    "Total": 755.0
+  },
+  {
+    "date": "2024-12-27",
+    "Ubuntu": 543.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 150.83999999999997,
+    "Total": 543.0
+  },
+  {
+    "date": "2024-12-28",
+    "Ubuntu": 90.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 146.84,
+    "Total": 90.0
+  },
+  {
+    "date": "2024-12-29",
+    "Ubuntu": 102.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 147.63,
+    "Total": 102.0
+  },
+  {
+    "date": "2024-12-30",
+    "Ubuntu": 617.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 191.23000000000002,
+    "Total": 617.0
+  },
+  {
+    "date": "2024-12-31",
+    "Ubuntu": 794.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 144.71,
+    "Total": 794.0
+  },
+  {
+    "date": "2025-01-01",
+    "Ubuntu": 115.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 150.67,
+    "Total": 115.0
+  },
+  {
+    "date": "2025-01-02",
+    "Ubuntu": 665.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 169.45999999999998,
+    "Total": 665.0
+  },
+  {
+    "date": "2025-01-03",
+    "Ubuntu": 1391.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 198.98000000000008,
+    "Total": 1391.0
+  },
+  {
     "date": "2025-01-04",
     "Ubuntu": 143.0,
     "Windows": 0,
