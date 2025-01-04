@@ -108,7 +108,7 @@
     "Ubuntu": 50.0,
     "Windows": 0,
     "MacOS": 65.0,
-    "Total": 50.0,
+    "Total": 115.0,
     "Self-hosted": 0
   },
   {
@@ -124,7 +124,7 @@
     "Ubuntu": 638.0,
     "Windows": 0,
     "MacOS": 0,
-    "Total": 542.0,
+    "Total": 638.0,
     "Self-hosted": 0
   },
   {
@@ -132,7 +132,7 @@
     "Ubuntu": 516.0,
     "Windows": 0,
     "MacOS": 0,
-    "Total": 419.0,
+    "Total": 516.0,
     "Self-hosted": 0
   },
   {
@@ -141,14 +141,14 @@
     "Windows": 0,
     "MacOS": 0,
     "Self-hosted": 0,
-    "Total": 390.0
+    "Total": 1337.0
   },
   {
     "date": "2025-01-04",
-    "Ubuntu": 41.0,
+    "Ubuntu": 44.0,
     "Windows": 0,
     "MacOS": 0,
     "Self-hosted": 0,
-    "Total": 41.0
+    "Total": 44.0
   }
 ]
