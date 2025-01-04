@@ -21022,5 +21022,29 @@
     "total_billable_time": 18.0,
     "run_duration_minutes": 0,
     "run_duration_ms": 1043000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12611460268,
+    "status": "success",
+    "created_at": "2025-01-04T15:01:52Z",
+    "updated_at": "2025-01-04T15:03:10Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12611460268",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-04T15:01:52Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 2.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 2.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 78000
   }
 ]
