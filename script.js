@@ -28,7 +28,6 @@ function showTab(tabId) {
 }
 
 async function loadOverview() {
-  
   try {
     const dailyTrendData = await fetchData('data/daily_trend.json');
     const workflowData = await fetchData('data/workflow_runs.json');
@@ -46,25 +45,48 @@ async function loadOverview() {
 
     let totalCost = 0;
     let selfHostedTime = 0;
+    let previousPeriodCost = 0;
+    let currentPeriodCost = 0;
 
-    // Process daily trend data
+    // Calculate the date for previous period start
+    const daysDiff = Math.floor((toDate - fromDate) / (1000 * 60 * 60 * 24)) + 1;
+    const previousEnd = new Date(fromDate);
+    previousEnd.setDate(previousEnd.getDate() - 1);
+    const previousStart = new Date(previousEnd);
+    previousStart.setDate(previousStart.getDate() - daysDiff + 1);
+
+    // First pass: Calculate costs for each period
     dailyTrendData.forEach((entry) => {
       const entryDate = normalizeToUTC(new Date(entry.date));
+      
+      // Current period
       if (entryDate >= fromDate && entryDate <= toDate) {
-        selfHostedTime += entry['Self-hosted'] || 0;
+        currentPeriodCost += entry.Ubuntu * COST_PER_MINUTE.UBUNTU;
+        totalCost = currentPeriodCost;  // Total cost is just current period
         
-        // Calculate costs for each OS type
-        if (entry.Ubuntu) totalCost += entry.Ubuntu * COST_PER_MINUTE.UBUNTU;
-        if (entry.Windows) totalCost += entry.Windows * COST_PER_MINUTE.WINDOWS;
-        if (entry.MacOS) totalCost += entry.MacOS * COST_PER_MINUTE.MACOS;
+        if (entry['Self-hosted']) {
+          selfHostedTime += entry['Self-hosted'];
+        }
+      }
+      
+      // Previous period
+      if (entryDate >= previousStart && entryDate < fromDate) {
+        previousPeriodCost += entry.Ubuntu * COST_PER_MINUTE.UBUNTU;
       }
     });
 
-    // Update widgets with inline layout
+    // Calculate trend
+    const costTrend = previousPeriodCost > 0 
+      ? ((currentPeriodCost - previousPeriodCost) / previousPeriodCost) * 100 
+      : 0;
+    
+    // Update display
     document.getElementById('totalCost').innerHTML = `
       <div class="widget-content">
         <span class="widget-value">$${totalCost.toFixed(2)}</span>
-        <span class="widget-trend ${totalCost > 0 ? 'positive' : 'negative'}">${totalCost > 0 ? '↑' : '↓'}</span>
+        <span class="widget-trend ${costTrend >= 0 ? 'positive' : 'negative'}">
+          ${costTrend >= 0 ? '↑' : '↓'} ${Math.abs(costTrend).toFixed(1)}%
+        </span>
       </div>
     `;
 
@@ -186,40 +208,55 @@ async function loadDetailedAnalysis() {
   try {
     const workflowData = await fetchData('data/workflow_runs.json');
     const container = document.getElementById('detailed-analysis-container');
-    
-    // Clear existing content
     container.innerHTML = '';
 
-    // Create filter controls - all in one line
+    // Add header section
+    const headerSection = document.createElement('div');
+    headerSection.className = 'section-header mb-4';
+    headerSection.innerHTML = `
+      <h2 class="text-xl font-bold mb-2">Detailed Workflow Analysis</h2>
+      <p class="text-sm opacity-70">Comprehensive view of all workflow runs with filtering and sorting capabilities</p>
+    `;
+    container.appendChild(headerSection);
+
+    // Create filter controls with entries per page selector
     const filterSection = document.createElement('div');
     filterSection.className = 'filter-controls';
     
-    // Get unique repositories and statuses
     const repos = [...new Set(workflowData.map(run => run.repo))];
     const statuses = [...new Set(workflowData.map(run => run.status))];
 
-    // Create filters with inline layout
     filterSection.innerHTML = `
       <div class="filter-group">
-        <select id="repo-filter">
+        <select id="repo-filter" class="text-sm">
           <option value="">All Repositories</option>
           ${repos.map(repo => `<option value="${repo}">${repo}</option>`).join('')}
         </select>
       </div>
       <div class="filter-group">
-        <select id="status-filter">
+        <select id="status-filter" class="text-sm">
           <option value="">All Statuses</option>
           ${statuses.map(status => `<option value="${status}">${status}</option>`).join('')}
         </select>
       </div>
       <div class="filter-group">
-        <input type="text" class="search-input" placeholder="Search workflows...">
+        <select id="self-hosted-filter" class="text-sm">
+          <option value="">All Runners</option>
+          <option value="Yes">Self-hosted</option>
+          <option value="No">GitHub-hosted</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <input type="text" class="search-input text-sm" placeholder="Search workflows...">
       </div>
     `;
     
     container.appendChild(filterSection);
 
-    // Create table
+    // Create table container
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'overflow-x-auto rounded-lg shadow';
+    
     const table = document.createElement('table');
     table.className = 'detailed-analysis-table';
     
@@ -236,29 +273,63 @@ async function loadDetailedAnalysis() {
     const thead = document.createElement('thead');
     thead.innerHTML = `
       <tr>
-        ${headers.map(header => `<th>${header}</th>`).join('')}
+        ${headers.map(header => `<th class="px-4 py-2">${header}</th>`).join('')}
       </tr>
     `;
     table.appendChild(thead);
 
-    const fromDate = new Date(document.getElementById('fromDate').value);
-    const toDate = new Date(document.getElementById('toDate').value);
+    // Add tbody
+    const tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+
+    const normalizeDate = (date) => {
+      const d = new Date(date);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    };
+    
+    const fromDate = normalizeDate(document.getElementById('fromDate').value);
+    const toDate = normalizeDate(document.getElementById('toDate').value);
 
     const filteredData = workflowData.filter(run => {
       const runDate = new Date(run.created_at.split('T')[0]);
       return runDate >= fromDate && runDate <= toDate;
     });
 
-    // Initialize DataTable with full width and more rows
+    tableContainer.appendChild(table);
+    container.appendChild(tableContainer);
+
+    // Initialize DataTable
+    if (detailedAnalysisTable) {
+      detailedAnalysisTable.destroy();
+    }
+
+    // Create a container for length menu
+    const lengthMenuContainer = document.createElement('div');
+    lengthMenuContainer.className = 'filter-group';
+    filterSection.appendChild(lengthMenuContainer);
+
     detailedAnalysisTable = $(table).DataTable({
       data: filteredData,
+      ordering: false, // Disable sorting
+      searching: true,
       columns: [
-        { data: 'repo' },
+        { 
+          data: 'repo',
+          render: function(data, type, row) {
+            return `<a href="${row.html_url}" target="_blank" class="text-blue-500 hover:text-blue-700">${data}</a>`;
+          }
+        },
         { data: 'workflow_name' },
         { 
           data: 'status',
           render: function(data) {
-            return `<span class="status-badge ${data.toLowerCase()}">${data}</span>`;
+            const statusClasses = {
+              success: 'success',
+              failure: 'failure',
+              cancelled: 'cancelled'
+            };
+            return `<span class="status-badge ${statusClasses[data.toLowerCase()]}">${data}</span>`;
           }
         },
         { 
@@ -273,7 +344,12 @@ async function loadDetailedAnalysis() {
             return `${data} mins`;
           }
         },
-        { data: 'total_billable_time' },
+        { 
+          data: 'total_billable_time',
+          render: function(data) {
+            return `${data} mins`;
+          }
+        },
         { 
           data: 'is_self_hosted',
           render: function(data) {
@@ -281,13 +357,26 @@ async function loadDetailedAnalysis() {
           }
         }
       ],
-      order: [[3, 'desc']],
-      pageLength: 25, // Show more rows per page
-      lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]], // Add option to show all rows
-      responsive: true,
-      scrollX: true, // Enable horizontal scrolling if needed
-      width: '100%'
+      pageLength: 10,
+      lengthMenu: [[10, 25, 50, 100], ['10 entries', '25 entries', '50 entries', '100 entries']],
+      dom: 'lrt<"bottom"ip><"clear">', // Custom DOM layout with length menu
+      language: {
+        lengthMenu: "_MENU_",
+        info: "_START_ to _END_ of _TOTAL_ entries",
+        paginate: {
+          first: "First",
+          last: "Last",
+          next: "Next",
+          previous: "Previous"
+        }
+      }
     });
+
+    // Move length menu to filter section
+    const lengthMenu = document.querySelector('.dataTables_length');
+    if (lengthMenu) {
+      filterSection.appendChild(lengthMenu);
+    }
 
     // Add event listeners for filters
     $('#repo-filter').on('change', function() {
@@ -298,11 +387,14 @@ async function loadDetailedAnalysis() {
       detailedAnalysisTable.columns(2).search(this.value).draw();
     });
 
+    $('#self-hosted-filter').on('change', function() {
+      detailedAnalysisTable.columns(6).search(this.value).draw();
+    });
+
     $('.search-input').on('keyup', function() {
       detailedAnalysisTable.search(this.value).draw();
     });
 
-    container.appendChild(table);
   } catch (error) {
     console.error('Error loading detailed analysis:', error);
   }
@@ -341,15 +433,23 @@ function updateBarChart(data) {
   const isDarkTheme = document.body.classList.contains('dark-theme');
 
   // Calculate dynamic height based on number of workflows
-  const barHeight = 20; // Reduced bar height
-  const padding = 40;
-  const totalHeight = (data.labels.length * (barHeight + 5)) + padding; // Reduced spacing
+  const minHeight = 400; // Minimum height to ensure chart is visible
+  const barHeight = 20;
+  const barSpacing = 8; // Reduced spacing between bars
+  const padding = 50; // Increased padding to account for labels
+  
+  // Calculate required height based on number of bars
+  const calculatedHeight = Math.max(
+    minHeight,
+    (data.labels.length * (barHeight + barSpacing)) + padding
+  );
 
-  // Set canvas height
-  ctx.canvas.height = totalHeight;
+  // Set canvas height and parent container height
+  ctx.canvas.height = calculatedHeight;
+  ctx.canvas.parentElement.style.height = `${calculatedHeight}px`;
 
   // Create vertical gradient (top to bottom)
-  const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+  const gradient = ctx.createLinearGradient(0, 0, 0, calculatedHeight);
   gradient.addColorStop(0, 'rgba(75, 192, 192, 0.9)');
   gradient.addColorStop(1, 'rgba(75, 192, 192, 0.3)');
 
@@ -357,7 +457,9 @@ function updateBarChart(data) {
   const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
   const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
 
-  if (window.barChartInstance) window.barChartInstance.destroy();
+  if (window.barChartInstance) {
+    window.barChartInstance.destroy();
+  }
 
   window.barChartInstance = new Chart(ctx, {
     type: 'bar',
@@ -370,8 +472,8 @@ function updateBarChart(data) {
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
         barThickness: barHeight,
-        barPercentage: 0.8,
-        categoryPercentage: 0.8
+        barPercentage: 0.95, // Increased to reduce gaps
+        categoryPercentage: 0.95 // Increased to reduce gaps
       }]
     },
     options: {
@@ -379,7 +481,7 @@ function updateBarChart(data) {
       maintainAspectRatio: false,
       indexAxis: 'y',
       animation: {
-        duration: 500 // Reduced animation time
+        duration: 300 // Reduced animation time
       },
       layout: {
         padding: {
@@ -397,25 +499,30 @@ function updateBarChart(data) {
       scales: {
         x: {
           beginAtZero: true,
+          grid: {
+            color: gridColor
+          },
           ticks: {
             color: textColor,
             font: {
               size: 11
             }
-          },
-          grid: {
-            color: gridColor
           }
         },
         y: {
+          grid: {
+            display: false
+          },
           ticks: {
             color: textColor,
             font: {
               size: 11
+            },
+            // Ensure all labels are visible
+            callback: function(value, index) {
+              const label = data.labels[index];
+              return label;
             }
-          },
-          grid: {
-            display: false
           }
         }
       }
