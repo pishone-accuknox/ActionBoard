@@ -81,10 +81,10 @@
   },
   {
     "date": "2025-01-05",
-    "Ubuntu": 145.0,
+    "Ubuntu": 146.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 83.19,
-    "Total": 145.0
+    "Self-hosted": 134.32000000000002,
+    "Total": 146.0
   }
 ]
