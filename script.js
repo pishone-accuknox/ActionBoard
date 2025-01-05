@@ -1,6 +1,7 @@
 let currentTheme = "light";
 let barChartInstance = null;
 let trendChartInstance = null;
+let detailedAnalysisTable = null;
 
 async function fetchData(url) {
   const response = await fetch(url);
@@ -12,22 +13,21 @@ function showTab(tabId) {
     tab.style.display = tab.id === tabId ? 'block' : 'none';
   });
 
-  // Highlight the selected tab
   document.querySelectorAll('.tab-button').forEach(button => {
     button.classList.remove('active');
   });
   document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
 
-  if (tabId === 'time-analysis') {
-    loadTimeAnalysis();
-  } else if (tabId === 'failures') {
-    loadFailures();
-  } else if (tabId === 'trend') {
-    loadTrendChart();
+  if (tabId === 'overview') {
+    loadOverview();
+  } else if (tabId === 'runtime-trends') {
+    loadRuntimeTrends();
+  } else if (tabId === 'detailed-analysis') {
+    loadDetailedAnalysis();
   }
 }
 
-async function loadTimeAnalysis() {
+async function loadOverview() {
   try {
     const dailyTrendData = await fetchData('data/daily_trend.json');
     const workflowData = await fetchData('data/workflow_runs.json');
@@ -39,351 +39,556 @@ async function loadTimeAnalysis() {
       MACOS: 0.08,
     };
 
-    // Normalize input dates to UTC midnight
     const normalizeToUTC = (date) => new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-
     const fromDate = normalizeToUTC(new Date(document.getElementById('fromDate').value));
     const toDate = normalizeToUTC(new Date(document.getElementById('toDate').value));
 
-    // Validate date range
-    if (isNaN(fromDate) || isNaN(toDate)) {
-      console.error('Invalid date range:', fromDate, toDate);
-      return;
-    }
-
     let totalCost = 0;
     let selfHostedTime = 0;
-    const aggregatedData = {
-      labels: [],
-      data: [],
-    };
+    let previousPeriodCost = 0;
+    let currentPeriodCost = 0;
 
-    // Process daily trend data for widgets
+    // Calculate the date for previous period start
+    const daysDiff = Math.floor((toDate - fromDate) / (1000 * 60 * 60 * 24)) + 1;
+    const previousEnd = new Date(fromDate);
+    previousEnd.setDate(previousEnd.getDate() - 1);
+    const previousStart = new Date(previousEnd);
+    previousStart.setDate(previousStart.getDate() - daysDiff + 1);
+
+    // First pass: Calculate costs for each period
     dailyTrendData.forEach((entry) => {
       const entryDate = normalizeToUTC(new Date(entry.date));
+      
+      // Current period
       if (entryDate >= fromDate && entryDate <= toDate) {
-        selfHostedTime += entry['Self-hosted'] || 0;
-
-        // Calculate cost from Total time
-        const totalTime = entry['Total'] || 0;
-        totalCost += totalTime * COST_PER_MINUTE.UBUNTU; // Default to Ubuntu
+        currentPeriodCost += entry.Ubuntu * COST_PER_MINUTE.UBUNTU;
+        totalCost = currentPeriodCost;  // Total cost is just current period
+        
+        if (entry['Self-hosted']) {
+          selfHostedTime += entry['Self-hosted'];
+        }
+      }
+      
+      // Previous period
+      if (entryDate >= previousStart && entryDate < fromDate) {
+        previousPeriodCost += entry.Ubuntu * COST_PER_MINUTE.UBUNTU;
       }
     });
 
-    // Process workflow data for the graph
+    // Calculate trend
+    const costTrend = previousPeriodCost > 0 
+      ? ((currentPeriodCost - previousPeriodCost) / previousPeriodCost) * 100 
+      : 0;
+    
+    // Update display
+    document.getElementById('totalCost').innerHTML = `
+      <div class="widget-content">
+        <span class="widget-value">$${totalCost.toFixed(2)}</span>
+        <span class="widget-trend ${costTrend >= 0 ? 'positive' : 'negative'}">
+          ${costTrend >= 0 ? '↑' : '↓'} ${Math.abs(costTrend).toFixed(1)}%
+        </span>
+      </div>
+    `;
+
+    document.getElementById('selfHostedTime').innerHTML = `
+      <div class="widget-content">
+        <span class="widget-value">${selfHostedTime.toFixed(1)}</span>
+        <span class="widget-unit">minutes</span>
+      </div>
+    `;
+
+    document.getElementById('repoCount').innerHTML = `
+      <div class="widget-content">
+        <span class="widget-value">${repoCountData.repo_count || 0}</span>
+        <span class="widget-unit">repositories</span>
+      </div>
+    `;
+
+    // Process workflow data for the bar chart
     const workflowAggregated = workflowData.reduce((acc, run) => {
       const runDate = normalizeToUTC(new Date(run.created_at.split('T')[0]));
-      if (runDate >= fromDate && runDate <= toDate && run.total_time_minutes > 0) {
+      if (runDate >= fromDate && runDate <= toDate && run.total_billable_time > 0) {
         const key = `${run.repo} - ${run.workflow_name}`;
-        acc[key] = (acc[key] || 0) + run.total_time_minutes;
+        acc[key] = (acc[key] || 0) + run.total_billable_time;
       }
       return acc;
     }, {});
 
     const sortedWorkflowData = Object.entries(workflowAggregated)
       .sort(([, a], [, b]) => b - a)
-      .reduce(
-        (acc, [key, value]) => {
-          acc.labels.push(key);
-          acc.data.push(value);
-          return acc;
-        },
-        { labels: [], data: [] }
-      );
+      .reduce((acc, [key, value]) => {
+        acc.labels.push(key);
+        acc.data.push(value);
+        return acc;
+      }, { labels: [], data: [] });
 
-    // Fetch repository count
-    const repoCount = repoCountData.repo_count || 0;
-
-    // Update widgets
-    document.getElementById('totalCost').innerText = `$${totalCost.toFixed(2)}`;
-    document.getElementById('topWorkflowsList').innerHTML = `<li>${selfHostedTime.toFixed(2)} minutes</li>`;
-    document.getElementById('repoCount').innerText = repoCount;
-
-    // Chart Logic
-    const barChartCtx = document.getElementById('workflowBarChart').getContext('2d');
-    const gradient = barChartCtx.createLinearGradient(0, 0, 0, barChartCtx.canvas.height);
-    gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
-    gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
-
-    const isDarkTheme = document.body.classList.contains('dark-theme');
-    const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
-    const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-
-    if (window.barChartInstance) window.barChartInstance.destroy();
-
-    window.barChartInstance = new Chart(barChartCtx, {
-      type: 'bar',
-      data: {
-        labels: sortedWorkflowData.labels,
-        datasets: [{
-          label: 'Billable Time (minutes)',
-          data: sortedWorkflowData.data,
-          backgroundColor: gradient,
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1,
-        }],
-      },
-      options: {
-        responsive: true,
-        indexAxis: 'y',
-        animation: {
-          duration: 1000,
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        scales: {
-          x: {
-            beginAtZero: true,
-            ticks: {
-              color: textColor,
-              font: {
-                size: 12,
-                weight: 'bold',
-              },
-            },
-            grid: {
-              color: gridColor,
-            },
-          },
-          y: {
-            ticks: {
-              color: textColor,
-              font: {
-                size: 12,
-                weight: 'bold',
-              },
-            },
-            grid: {
-              display: false,
-            },
-          },
-        },
-      },
-    });
-
+    updateBarChart(sortedWorkflowData);
   } catch (error) {
-    console.error('Error loading time analysis:', error);
+    console.error('Error loading overview:', error);
   }
 }
 
-// Load Daily Runtime Trend chart
-async function loadTrendChart() {
-  const trendData = await fetchData('data/daily_trend.json');
+async function loadRuntimeTrends() {
+  try {
+    const trendData = await fetchData('data/daily_trend.json');
+    const fromDate = new Date(document.getElementById('fromDate').value);
+    const toDate = new Date(document.getElementById('toDate').value);
 
-  // Wait for the canvas to be fully visible before rendering
-  const trendChartCanvas = document.getElementById('trendChart');
+    // Filter data based on date range
+    const filteredData = trendData.filter(d => {
+      const date = new Date(d.date);
+      return date >= fromDate && date <= toDate;
+    });
 
-  if (trendChartInstance) trendChartInstance.destroy();
-
-  // Use a timeout to ensure rendering after visibility
-  setTimeout(() => {
-    const trendChartCtx = trendChartCanvas.getContext('2d');
-
-    // Detect theme
-    const isDarkTheme = document.body.classList.contains('dark-theme');
-    const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
-    const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-
-    // Filter out OS-specific data and create datasets dynamically
+    // Remove datasets with all zero values
     const datasets = [];
-    const osColors = {
-      Ubuntu: 'rgba(75, 192, 192, 0.7)',
-      Windows: 'rgba(54, 162, 235, 0.7)',
-      MacOS: 'rgba(255, 99, 132, 0.7)'
-    };
-
-    Object.keys(osColors).forEach(os => {
-      const osData = trendData.map(item => item[os] || 0);
-      if (osData.some(value => value > 0)) {
+    const osTypes = ['Ubuntu', 'Windows', 'MacOS', 'Self-hosted'];
+    
+    osTypes.forEach(os => {
+      const hasNonZeroValue = filteredData.some(d => (d[os] || 0) > 0);
+      if (hasNonZeroValue) {
         datasets.push({
           label: os,
-          data: osData,
-          borderColor: osColors[os].replace(/0\.7/, '1'),
-          borderWidth: 2,
-          fill: true,
-          backgroundColor: trendChartCtx.createLinearGradient(0, 0, 0, trendChartCanvas.clientHeight).addColorStop(0, osColors[os]),
-          tension: 0.2,
+          data: filteredData.map(d => d[os] || 0),
+          borderColor: getOsColor(os),
+          backgroundColor: getOsColor(os, 0.2),
+          tension: 0.4
         });
       }
     });
 
-    trendChartInstance = new Chart(trendChartCtx, {
+    // Update chart
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    if (trendChartInstance) trendChartInstance.destroy();
+
+    trendChartInstance = new Chart(ctx, {
       type: 'line',
-      data: {
-        labels: trendData.map(item => item.date),
+      data: { 
+        labels: filteredData.map(d => d.date),
         datasets: datasets
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        interaction: {
+          mode: 'nearest',
+          intersect: false
+        },
         plugins: {
-          legend: { display: true },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                return `${context.dataset.label}: ${context.raw} minutes`;
-              },
-            },
+          legend: {
+            position: 'top'
           },
+          tooltip: {
+            mode: 'index'
+          }
         },
         scales: {
-          x: {
-            grid: { display: false },
-            ticks: {
-              color: textColor,
-              maxTicksLimit: 7, // Limit x-axis labels
-            },
-          },
           y: {
-            grid: {
-              color: gridColor,
-            },
-            ticks: {
-              beginAtZero: true,
-              color: textColor,
-            },
-          },
-        },
-      },
+            beginAtZero: true
+          }
+        }
+      }
     });
-  }, 100); // Delay slightly to ensure proper rendering
+  } catch (error) {
+    console.error('Error loading runtime trends:', error);
+  }
 }
 
-async function loadFailures() {
-  const failuresData = await fetchData('data/failed_runs.json');
-  const failuresContainer = document.getElementById('failuresContainer');
-  failuresContainer.innerHTML = ''; // Clear existing content
+function getOsColor(os, alpha = 1) {
+  const colors = {
+    'Ubuntu': `rgba(233, 84, 32, ${alpha})`,
+    'Windows': `rgba(0, 120, 215, ${alpha})`,
+    'MacOS': `rgba(128, 128, 128, ${alpha})`,
+    'Self-hosted': `rgba(153, 102, 255, ${alpha})`
+  };
+  return colors[os];
+}
 
-  // Group failures by date
-  const groupedFailures = failuresData.reduce((acc, run) => {
-    const date = run.created_at.split('T')[0]; // Extract YYYY-MM-DD
-    acc[date] = acc[date] || [];
-    acc[date].push(run);
-    return acc;
-  }, {});
+async function loadDetailedAnalysis() {
+  try {
+    const workflowData = await fetchData('data/workflow_runs.json');
+    const container = document.getElementById('detailed-analysis-container');
+    container.innerHTML = '';
 
-  // Render a collapsible table for each day
-  Object.keys(groupedFailures).sort((a, b) => new Date(b) - new Date(a)).forEach(date => {
-    // Create a collapsible section
-    const section = document.createElement('div');
-    section.classList.add('failure-section');
-
-    const toggleButton = document.createElement('button');
-    toggleButton.classList.add('toggle-button');
-    toggleButton.textContent = `Failures on ${date}`;
-    toggleButton.onclick = () => {
-      const table = section.querySelector('table');
-      table.style.display = table.style.display === 'none' ? 'table' : 'none';
-    };
-
-    const table = document.createElement('table');
-    table.classList.add('failure-table');
-    table.style.display = 'table'; // Visible by default
-    table.innerHTML = `
-      <thead>
-        <tr>
-          <th>Repository</th>
-          <th>Workflow Name</th>
-          <th>Date</th>
-          <th>Run Link</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${groupedFailures[date]
-          .map(run => `
-            <tr>
-              <td>${run.repo}</td>
-              <td>${run.workflow_name}</td>
-              <td>${run.created_at.split('T')[0]}</td>
-              <td><a href="${run.html_url}" target="_blank">View Run</a></td>
-            </tr>
-          `)
-          .join('')}
-      </tbody>
+    // Add header section
+    const headerSection = document.createElement('div');
+    headerSection.className = 'section-header mb-4';
+    headerSection.innerHTML = `
+      <h2 class="text-xl font-bold mb-2">Detailed Workflow Analysis</h2>
+      <p class="text-sm opacity-70">Comprehensive view of all workflow runs with filtering and sorting capabilities</p>
     `;
+    container.appendChild(headerSection);
 
-    section.appendChild(toggleButton);
-    section.appendChild(table);
-    failuresContainer.appendChild(section);
+    // Create filter controls with entries per page selector
+    const filterSection = document.createElement('div');
+    filterSection.className = 'filter-controls';
+    
+    const repos = [...new Set(workflowData.map(run => run.repo))];
+    const statuses = [...new Set(workflowData.map(run => run.status))];
+
+    filterSection.innerHTML = `
+      <div class="filter-group">
+        <select id="repo-filter" class="text-sm">
+          <option value="">All Repositories</option>
+          ${repos.map(repo => `<option value="${repo}">${repo}</option>`).join('')}
+        </select>
+      </div>
+      <div class="filter-group">
+        <select id="status-filter" class="text-sm">
+          <option value="">All Statuses</option>
+          ${statuses.map(status => `<option value="${status}">${status}</option>`).join('')}
+        </select>
+      </div>
+      <div class="filter-group">
+        <select id="self-hosted-filter" class="text-sm">
+          <option value="">All Runners</option>
+          <option value="Yes">Self-hosted</option>
+          <option value="No">GitHub-hosted</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <input type="text" class="search-input text-sm" placeholder="Search workflows...">
+      </div>
+    `;
+    
+    container.appendChild(filterSection);
+
+    // Create table container
+    const tableContainer = document.createElement('div');
+    tableContainer.className = 'overflow-x-auto rounded-lg shadow';
+    
+    const table = document.createElement('table');
+    table.className = 'detailed-analysis-table';
+    
+    const headers = [
+      'Repository',
+      'Workflow Name',
+      'Status',
+      'Created At',
+      'Duration',
+      'Total Billable Time',
+      'Self-hosted'
+    ];
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr>
+        ${headers.map(header => `<th class="px-4 py-2">${header}</th>`).join('')}
+      </tr>
+    `;
+    table.appendChild(thead);
+
+    // Add tbody
+    const tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+
+    const normalizeDate = (date) => {
+      const d = new Date(date);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    };
+    
+    const fromDate = normalizeDate(document.getElementById('fromDate').value);
+    const toDate = normalizeDate(document.getElementById('toDate').value);
+
+    const filteredData = workflowData.filter(run => {
+      const runDate = new Date(run.created_at.split('T')[0]);
+      return runDate >= fromDate && runDate <= toDate;
+    });
+
+    tableContainer.appendChild(table);
+    container.appendChild(tableContainer);
+
+    // Initialize DataTable
+    if (detailedAnalysisTable) {
+      detailedAnalysisTable.destroy();
+    }
+
+    // Create a container for length menu
+    const lengthMenuContainer = document.createElement('div');
+    lengthMenuContainer.className = 'filter-group';
+    filterSection.appendChild(lengthMenuContainer);
+
+    detailedAnalysisTable = $(table).DataTable({
+      data: filteredData,
+      ordering: false, // Disable sorting
+      searching: true,
+      columns: [
+        { 
+          data: 'repo',
+          render: function(data, type, row) {
+            return `<a href="${row.html_url}" target="_blank" class="text-blue-500 hover:text-blue-700">${data}</a>`;
+          }
+        },
+        { data: 'workflow_name' },
+        { 
+          data: 'status',
+          render: function(data) {
+            const statusClasses = {
+              success: 'success',
+              failure: 'failure',
+              cancelled: 'cancelled'
+            };
+            return `<span class="status-badge ${statusClasses[data.toLowerCase()]}">${data}</span>`;
+          }
+        },
+        { 
+          data: 'created_at',
+          render: function(data) {
+            return new Date(data).toLocaleString();
+          }
+        },
+        { 
+          data: 'run_duration_minutes',
+          render: function(data) {
+            return `${data} mins`;
+          }
+        },
+        { 
+          data: 'total_billable_time',
+          render: function(data) {
+            return `${data} mins`;
+          }
+        },
+        { 
+          data: 'is_self_hosted',
+          render: function(data) {
+            return data ? 'Yes' : 'No';
+          }
+        }
+      ],
+      pageLength: 10,
+      lengthMenu: [[10, 25, 50, 100], ['10 entries', '25 entries', '50 entries', '100 entries']],
+      dom: 'lrt<"bottom"ip><"clear">', // Custom DOM layout with length menu
+      language: {
+        lengthMenu: "_MENU_",
+        info: "_START_ to _END_ of _TOTAL_ entries",
+        paginate: {
+          first: "First",
+          last: "Last",
+          next: "Next",
+          previous: "Previous"
+        }
+      }
+    });
+
+    // Move length menu to filter section
+    const lengthMenu = document.querySelector('.dataTables_length');
+    if (lengthMenu) {
+      filterSection.appendChild(lengthMenu);
+    }
+
+    // Add event listeners for filters
+    $('#repo-filter').on('change', function() {
+      detailedAnalysisTable.columns(0).search(this.value).draw();
+    });
+
+    $('#status-filter').on('change', function() {
+      detailedAnalysisTable.columns(2).search(this.value).draw();
+    });
+
+    $('#self-hosted-filter').on('change', function() {
+      detailedAnalysisTable.columns(6).search(this.value).draw();
+    });
+
+    $('.search-input').on('keyup', function() {
+      detailedAnalysisTable.search(this.value).draw();
+    });
+
+  } catch (error) {
+    console.error('Error loading detailed analysis:', error);
+  }
+}
+
+function createFilter(label, options, id) {
+  const container = document.createElement('div');
+  container.className = 'filter-group';
+
+  const filterLabel = document.createElement('label');
+  filterLabel.textContent = label;
+  
+  const select = document.createElement('select');
+  select.id = id;
+  
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.textContent = `All ${label}s`;
+  select.appendChild(defaultOption);
+  
+  options.forEach(option => {
+    const optionElement = document.createElement('option');
+    optionElement.value = option;
+    optionElement.textContent = option;
+    select.appendChild(optionElement);
+  });
+
+  container.appendChild(filterLabel);
+  container.appendChild(select);
+  
+  return container;
+}
+
+function updateBarChart(data) {
+  const ctx = document.getElementById('workflowBarChart').getContext('2d');
+  const isDarkTheme = document.body.classList.contains('dark-theme');
+
+  // Calculate dynamic height based on number of workflows
+  const minHeight = 400; // Minimum height to ensure chart is visible
+  const barHeight = 20;
+  const barSpacing = 8; // Reduced spacing between bars
+  const padding = 50; // Increased padding to account for labels
+  
+  // Calculate required height based on number of bars
+  const calculatedHeight = Math.max(
+    minHeight,
+    (data.labels.length * (barHeight + barSpacing)) + padding
+  );
+
+  // Set canvas height and parent container height
+  ctx.canvas.height = calculatedHeight;
+  ctx.canvas.parentElement.style.height = `${calculatedHeight}px`;
+
+  // Create vertical gradient (top to bottom)
+  const gradient = ctx.createLinearGradient(0, 0, 0, calculatedHeight);
+  gradient.addColorStop(0, 'rgba(75, 192, 192, 0.9)');
+  gradient.addColorStop(1, 'rgba(75, 192, 192, 0.3)');
+
+  // Set colors based on theme
+  const textColor = isDarkTheme ? '#e0e0e0' : '#333333';
+  const gridColor = isDarkTheme ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+  if (window.barChartInstance) {
+    window.barChartInstance.destroy();
+  }
+
+  window.barChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.labels,
+      datasets: [{
+        label: 'Billable Time (minutes)',
+        data: data.data,
+        backgroundColor: gradient,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        barThickness: barHeight,
+        barPercentage: 0.95, // Increased to reduce gaps
+        categoryPercentage: 0.95 // Increased to reduce gaps
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      animation: {
+        duration: 300 // Reduced animation time
+      },
+      layout: {
+        padding: {
+          left: 10,
+          right: 20,
+          top: 10,
+          bottom: 10
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: {
+            color: gridColor
+          },
+          ticks: {
+            color: textColor,
+            font: {
+              size: 11
+            }
+          }
+        },
+        y: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: textColor,
+            font: {
+              size: 11
+            },
+            // Ensure all labels are visible
+            callback: function(value, index) {
+              const label = data.labels[index];
+              return label;
+            }
+          }
+        }
+      }
+    }
   });
 }
 
-async function updateLastUpdated() {
-  const lastUpdatedElement = document.getElementById('lastUpdated');
-
-  try {
-    const response = await fetch('data/last_processed_time.json'); // Adjust path if needed
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    const lastProcessedTime = new Date(data.last_processed_time);
-
-    // Format the date
-    const formattedDate = lastProcessedTime.toLocaleString(undefined, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
-
-    lastUpdatedElement.textContent = formattedDate;
-  } catch (error) {
-    console.error('Error fetching last_processed_time.json:', error);
-    lastUpdatedElement.textContent = 'Error loading timestamp';
-  }
-}
 
 function toggleTheme() {
   const isChecked = document.getElementById("checkboxInput").checked;
   document.body.className = isChecked ? "dark-theme" : "light-theme";
   localStorage.setItem("theme", isChecked ? "dark" : "light");
 
-  loadTimeAnalysis();
-  loadTrendChart();
+  // Reload current tab to update chart colors
+  const activeTab = document.querySelector('.tab-button.active');
+  if (activeTab) {
+    showTab(activeTab.getAttribute('onclick').match(/'([^']+)'/)[1]);
+  }
+  
 }
 
-// Load theme preference on page load
+// Initialize on page load
 window.onload = () => {
-  showTab('time-analysis');
   const savedTheme = localStorage.getItem("theme") || "light";
   document.body.className = savedTheme === "dark" ? "dark-theme" : "light-theme";
   document.getElementById("checkboxInput").checked = savedTheme === "dark";
 
-  // Date Range Picker
+  // Set default date range (last 7 days)
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - 7);
+  
+  document.getElementById('fromDate').value = startDate.toISOString().split('T')[0];
+  document.getElementById('toDate').value = endDate.toISOString().split('T')[0];
+
+  // Initialize date range picker
   flatpickr('#dateRange', {
     mode: 'range',
     dateFormat: 'Y-m-d',
-    defaultDate: [
-      new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 7 days ago
-      new Date().toISOString().split('T')[0] // Today
-    ],
-    onReady: (selectedDates) => {
-      // Set default values to hidden inputs on initial load
+    defaultDate: [startDate, endDate],
+    onChange: (selectedDates) => {
       if (selectedDates.length === 2) {
-        const [fromDate, toDate] = selectedDates;
-        document.getElementById('fromDate').value = fromDate.toISOString().split('T')[0];
-        document.getElementById('toDate').value = toDate.toISOString().split('T')[0];
-        loadTimeAnalysis(); // Render the graph with default range
+        document.getElementById('fromDate').value = selectedDates[0].toISOString().split('T')[0];
+        document.getElementById('toDate').value = selectedDates[1].toISOString().split('T')[0];
+        
+        // Reload current tab
+        const activeTab = document.querySelector('.tab-button.active');
+        if (activeTab) {
+          showTab(activeTab.getAttribute('onclick').match(/'([^']+)'/)[1]);
+        }
       }
-    },
-    onClose: (selectedDates) => {
-      if (selectedDates.length === 2) {
-        const [fromDate, toDate] = selectedDates;
-        document.getElementById('fromDate').value = fromDate.toISOString().split('T')[0];
-        document.getElementById('toDate').value = toDate.toISOString().split('T')[0];
-        loadTimeAnalysis(); // Reload the graph when a new range is selected
-      }
-    },
+    }
   });
-};  
 
-// Initial Load
-loadTimeAnalysis();
-loadFailures();
-updateLastUpdated();
+  // Update last processed time
+  fetch('data/last_processed_time.json')
+    .then(response => response.json())
+    .then(data => {
+      const lastUpdated = new Date(data.last_processed_time).toLocaleString();
+      document.getElementById('lastUpdated').textContent = lastUpdated;
+    })
+    .catch(error => {
+      console.error('Error loading last processed time:', error);
+      document.getElementById('lastUpdated').textContent = 'Unknown';
+    });
+
+  // Show overview tab by default
+  showTab('overview');
+};
