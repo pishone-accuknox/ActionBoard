@@ -26902,5 +26902,77 @@
     "total_billable_time": 5.0,
     "run_duration_minutes": 0,
     "run_duration_ms": 302000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12640273117,
+    "status": "success",
+    "created_at": "2025-01-06T21:02:05Z",
+    "updated_at": "2025-01-06T21:02:49Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12640273117",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-06T21:02:05Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 44000
+  },
+  {
+    "repo": "knox-gateway",
+    "workflow_name": "knox-gateway Workflow",
+    "run_id": 12639030281,
+    "status": "success",
+    "created_at": "2025-01-06T19:29:49Z",
+    "updated_at": "2025-01-06T19:36:19Z",
+    "html_url": "https://github.com/accuknox/knox-gateway/actions/runs/12639030281",
+    "head_branch": "receiveOpenSearchWebhookEvents",
+    "head_sha": "deb339b415f86dfea30dc41bf518625cc83ce4ba",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-06T19:29:49Z",
+    "workflow_id": 51826438,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 11.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 11.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 390000
+  },
+  {
+    "repo": "knox-gateway",
+    "workflow_name": "knox-gateway Workflow",
+    "run_id": 12638747697,
+    "status": "failure",
+    "created_at": "2025-01-06T19:09:25Z",
+    "updated_at": "2025-01-06T19:12:25Z",
+    "html_url": "https://github.com/accuknox/knox-gateway/actions/runs/12638747697",
+    "head_branch": "receiveOpenSearchWebhookEvents",
+    "head_sha": "9500f75bab5220439dce612fc761a588c9c43752",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-06T19:09:25Z",
+    "workflow_id": 51826438,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 5.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 5.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 180000
   }
 ]
