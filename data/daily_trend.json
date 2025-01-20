@@ -201,10 +201,10 @@
   },
   {
     "date": "2025-01-20",
-    "Ubuntu": 66.0,
+    "Ubuntu": 70.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 29.57,
-    "Total": 66.0
+    "Self-hosted": 35.17,
+    "Total": 70.0
   }
 ]
