@@ -131038,5 +131038,77 @@
     "total_billable_time": 0.0,
     "run_duration_minutes": 5.3,
     "run_duration_ms": 318000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 12960884283,
+    "status": "success",
+    "created_at": "2025-01-25T02:16:59Z",
+    "updated_at": "2025-01-25T02:18:20Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12960884283",
+    "head_branch": "stage",
+    "head_sha": "31c1d0ae78e01aab024171d4ed8aedd6b7740056",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-25T02:16:59Z",
+    "workflow_id": 129309418,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 2.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 2.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 81000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12961227276,
+    "status": "success",
+    "created_at": "2025-01-25T03:02:03Z",
+    "updated_at": "2025-01-25T03:02:51Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12961227276",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-25T03:02:03Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 48000
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 12960697299,
+    "status": "success",
+    "created_at": "2025-01-25T01:53:40Z",
+    "updated_at": "2025-01-25T01:59:14Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12960697299",
+    "head_branch": "Sre-Automation",
+    "head_sha": "f1f27d23ba2f0491a9bcd0c46197004d4ed5ad3c",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-25T01:53:40Z",
+    "workflow_id": 85028954,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 5.57,
+    "run_duration_ms": 334000
   }
 ]
