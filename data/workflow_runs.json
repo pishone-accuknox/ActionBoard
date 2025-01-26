@@ -132046,5 +132046,101 @@
     "total_billable_time": 0.0,
     "run_duration_minutes": 5.37,
     "run_duration_ms": 322000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 12970576636,
+    "status": "success",
+    "created_at": "2025-01-26T02:22:34Z",
+    "updated_at": "2025-01-26T02:23:51Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12970576636",
+    "head_branch": "stage",
+    "head_sha": "31c1d0ae78e01aab024171d4ed8aedd6b7740056",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T02:22:34Z",
+    "workflow_id": 129309418,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 2.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 2.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 77000
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 12970405224,
+    "status": "success",
+    "created_at": "2025-01-26T01:58:22Z",
+    "updated_at": "2025-01-26T02:04:25Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/12970405224",
+    "head_branch": "Sre-Automation",
+    "head_sha": "f1f27d23ba2f0491a9bcd0c46197004d4ed5ad3c",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T01:58:22Z",
+    "workflow_id": 85028954,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 6.05,
+    "run_duration_ms": 363000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12970869977,
+    "status": "success",
+    "created_at": "2025-01-26T03:03:50Z",
+    "updated_at": "2025-01-26T03:04:52Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12970869977",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T03:03:50Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 62000
+  },
+  {
+    "repo": "deployments",
+    "workflow_name": "development",
+    "run_id": 12970707808,
+    "status": "success",
+    "created_at": "2025-01-26T02:40:28Z",
+    "updated_at": "2025-01-26T02:43:23Z",
+    "html_url": "https://github.com/accuknox/deployments/actions/runs/12970707808",
+    "head_branch": "development",
+    "head_sha": "58e105049b5c0acdffdcdf83e659bc8d21041d4e",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T02:40:28Z",
+    "workflow_id": 93786093,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0,
+    "run_duration_minutes": 2.92,
+    "run_duration_ms": 175000
   }
 ]
