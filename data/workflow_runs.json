@@ -132142,5 +132142,101 @@
     "total_billable_time": 0,
     "run_duration_minutes": 2.92,
     "run_duration_ms": 175000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Stage",
+    "run_id": 12971105154,
+    "status": "success",
+    "created_at": "2025-01-26T03:34:41Z",
+    "updated_at": "2025-01-26T03:52:13Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12971105154",
+    "head_branch": "stage",
+    "head_sha": "31c1d0ae78e01aab024171d4ed8aedd6b7740056",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T03:34:41Z",
+    "workflow_id": 127074475,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 18.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 18.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 1052000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 12971992082,
+    "status": "success",
+    "created_at": "2025-01-26T06:02:34Z",
+    "updated_at": "2025-01-26T06:03:39Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/12971992082",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T06:02:34Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 65000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Demo",
+    "run_id": 12971095371,
+    "status": "success",
+    "created_at": "2025-01-26T03:33:20Z",
+    "updated_at": "2025-01-26T03:45:24Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12971095371",
+    "head_branch": "stage",
+    "head_sha": "31c1d0ae78e01aab024171d4ed8aedd6b7740056",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T03:33:20Z",
+    "workflow_id": 127373440,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 12.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 12.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 724000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "CWPP - Prod",
+    "run_id": 12971094049,
+    "status": "success",
+    "created_at": "2025-01-26T03:33:12Z",
+    "updated_at": "2025-01-26T03:44:49Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/12971094049",
+    "head_branch": "stage",
+    "head_sha": "31c1d0ae78e01aab024171d4ed8aedd6b7740056",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-26T03:33:12Z",
+    "workflow_id": 128108711,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 12.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 12.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 697000
   }
 ]
