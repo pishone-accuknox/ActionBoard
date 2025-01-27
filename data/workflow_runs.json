@@ -135166,5 +135166,53 @@
     "total_billable_time": 18.0,
     "run_duration_minutes": 0,
     "run_duration_ms": 1043000
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Sync development branch from stage branch",
+    "run_id": 12983257491,
+    "status": "failure",
+    "created_at": "2025-01-27T06:26:04Z",
+    "updated_at": "2025-01-27T06:26:20Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12983257491",
+    "head_branch": "stage",
+    "head_sha": "a7555cf86d6a091ff47dec81f012f96b7d37cc86",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-27T06:26:04Z",
+    "workflow_id": 77173422,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 16000
+  },
+  {
+    "repo": "accuknox-frontend",
+    "workflow_name": "Accuknox Frontend PR Check",
+    "run_id": 12983241432,
+    "status": "success",
+    "created_at": "2025-01-27T06:24:45Z",
+    "updated_at": "2025-01-27T06:24:57Z",
+    "html_url": "https://github.com/accuknox/accuknox-frontend/actions/runs/12983241432",
+    "head_branch": "CNAPP-17189-a-stage",
+    "head_sha": "47ff7f5e9d5590db8c69f4fc1afdec54636e1f18",
+    "run_attempt": 1,
+    "run_started_at": "2025-01-27T06:24:45Z",
+    "workflow_id": 90506516,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 12000
   }
 ]
