@@ -39,36 +39,42 @@ async function loadOverview() {
       MACOS: 0.08,
     };
 
-    const normalizeToUTC = (date) => new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    // Normalize dates to UTC (start of the day)
+    const normalizeToUTC = (date) => {
+      return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    };
+
+    // Get date range from input
     const fromDate = normalizeToUTC(new Date(document.getElementById('fromDate').value));
     const toDate = normalizeToUTC(new Date(document.getElementById('toDate').value));
+    toDate.setUTCHours(23, 59, 59, 999); // Include the entire day
 
     let totalCost = 0;
     let selfHostedTime = 0;
     let previousPeriodCost = 0;
     let currentPeriodCost = 0;
 
-    // Calculate the date for previous period start
+    // Calculate the date for the previous period
     const daysDiff = Math.floor((toDate - fromDate) / (1000 * 60 * 60 * 24)) + 1;
     const previousEnd = new Date(fromDate);
-    previousEnd.setDate(previousEnd.getDate() - 1);
+    previousEnd.setUTCDate(previousEnd.getUTCDate() - 1);
     const previousStart = new Date(previousEnd);
-    previousStart.setDate(previousStart.getDate() - daysDiff + 1);
+    previousStart.setUTCDate(previousStart.getUTCDate() - daysDiff + 1);
 
-    // First pass: Calculate costs for each period
+    // Calculate costs for the current and previous periods
     dailyTrendData.forEach((entry) => {
       const entryDate = normalizeToUTC(new Date(entry.date));
-      
+
       // Current period
       if (entryDate >= fromDate && entryDate <= toDate) {
         currentPeriodCost += entry.Ubuntu * COST_PER_MINUTE.UBUNTU;
-        totalCost = currentPeriodCost;  // Total cost is just current period
-        
+        totalCost = currentPeriodCost; // Total cost is just the current period
+
         if (entry['Self-hosted']) {
           selfHostedTime += entry['Self-hosted'];
         }
       }
-      
+
       // Previous period
       if (entryDate >= previousStart && entryDate < fromDate) {
         previousPeriodCost += entry.Ubuntu * COST_PER_MINUTE.UBUNTU;
@@ -76,10 +82,10 @@ async function loadOverview() {
     });
 
     // Calculate trend
-    const costTrend = previousPeriodCost > 0 
-      ? ((currentPeriodCost - previousPeriodCost) / previousPeriodCost) * 100 
+    const costTrend = previousPeriodCost > 0
+      ? ((currentPeriodCost - previousPeriodCost) / previousPeriodCost) * 100
       : 0;
-    
+
     // Update display
     document.getElementById('totalCost').innerHTML = `
       <div class="widget-content">
@@ -219,7 +225,7 @@ async function loadDetailedAnalysis() {
     `;
     container.appendChild(headerSection);
 
-    // Create filter controls with entries per page selector
+    // Create filter controls
     const filterSection = document.createElement('div');
     filterSection.className = 'filter-controls';
     
@@ -282,17 +288,13 @@ async function loadDetailedAnalysis() {
     const tbody = document.createElement('tbody');
     table.appendChild(tbody);
 
-    const normalizeDate = (date) => {
-      const d = new Date(date);
-      d.setHours(0, 0, 0, 0);
-      return d;
-    };
-    
-    const fromDate = normalizeDate(document.getElementById('fromDate').value);
-    const toDate = normalizeDate(document.getElementById('toDate').value);
+    // Get date range from input
+    const fromDate = new Date(document.getElementById('fromDate').value + 'T00:00:00Z'); // Start of the day in UTC
+    const toDate = new Date(document.getElementById('toDate').value + 'T23:59:59.999Z'); // End of the day in UTC
 
+    // Filter data based on date range
     const filteredData = workflowData.filter(run => {
-      const runDate = new Date(run.created_at.split('T')[0]);
+      const runDate = new Date(run.created_at); // Preserve the time component
       return runDate >= fromDate && runDate <= toDate;
     });
 
@@ -304,14 +306,9 @@ async function loadDetailedAnalysis() {
       detailedAnalysisTable.destroy();
     }
 
-    // Create a container for length menu
-    const lengthMenuContainer = document.createElement('div');
-    lengthMenuContainer.className = 'filter-group';
-    filterSection.appendChild(lengthMenuContainer);
-
     detailedAnalysisTable = $(table).DataTable({
       data: filteredData,
-      ordering: false, // Disable sorting
+      ordering: false,
       searching: true,
       columns: [
         { 
@@ -335,7 +332,7 @@ async function loadDetailedAnalysis() {
         { 
           data: 'created_at',
           render: function(data) {
-            return new Date(data).toLocaleString();
+            return new Date(data).toUTCString(); // Display in UTC
           }
         },
         { 
@@ -359,7 +356,7 @@ async function loadDetailedAnalysis() {
       ],
       pageLength: 10,
       lengthMenu: [[10, 25, 50, 100], ['10 entries', '25 entries', '50 entries', '100 entries']],
-      dom: 'lrt<"bottom"ip><"clear">', // Custom DOM layout with length menu
+      dom: 'lrt<"bottom"ip><"clear">',
       language: {
         lengthMenu: "_MENU_",
         info: "_START_ to _END_ of _TOTAL_ entries",
