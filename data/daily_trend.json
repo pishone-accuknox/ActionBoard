@@ -305,10 +305,10 @@
   },
   {
     "date": "2025-02-02",
-    "Ubuntu": 82.0,
+    "Ubuntu": 108.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 133.28999999999996,
-    "Total": 82.0
+    "Self-hosted": 170.90999999999997,
+    "Total": 108.0
   }
 ]
