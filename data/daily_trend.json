@@ -302,5 +302,13 @@
     "MacOS": 0,
     "Self-hosted": 117.69000000000001,
     "Total": 133.0
+  },
+  {
+    "date": "2025-02-02",
+    "Ubuntu": 1.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 44.3,
+    "Total": 1.0
   }
 ]
