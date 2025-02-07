@@ -345,10 +345,10 @@
   },
   {
     "date": "2025-02-07",
-    "Ubuntu": 135.0,
+    "Ubuntu": 565.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 42.74999999999999,
-    "Total": 135.0
+    "Self-hosted": 92.89000000000003,
+    "Total": 565.0
   }
 ]
