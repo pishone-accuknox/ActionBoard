@@ -377,10 +377,10 @@
   },
   {
     "date": "2025-02-11",
-    "Ubuntu": 21.0,
+    "Ubuntu": 204.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 43.88999999999999,
-    "Total": 21.0
+    "Self-hosted": 96.46999999999998,
+    "Total": 204.0
   }
 ]
