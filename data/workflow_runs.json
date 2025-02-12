@@ -214750,5 +214750,53 @@
     "total_billable_time": 0.0,
     "run_duration_minutes": 4.27,
     "run_duration_ms": 256000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 13294787880,
+    "status": "success",
+    "created_at": "2025-02-12T21:01:54Z",
+    "updated_at": "2025-02-12T21:02:47Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/13294787880",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-12T21:01:54Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 53000
+  },
+  {
+    "repo": "trivy-db",
+    "workflow_name": "Copy Trivy DB to Private ECR",
+    "run_id": 13292445555,
+    "status": "success",
+    "created_at": "2025-02-12T18:37:03Z",
+    "updated_at": "2025-02-12T18:37:21Z",
+    "html_url": "https://github.com/accuknox/trivy-db/actions/runs/13292445555",
+    "head_branch": "main",
+    "head_sha": "aec90885ae13a719d7cba07c226a7d127d4dee3a",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-12T18:37:03Z",
+    "workflow_id": 139796954,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 18000
   }
 ]
