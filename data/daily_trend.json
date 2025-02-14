@@ -401,10 +401,10 @@
   },
   {
     "date": "2025-02-14",
-    "Ubuntu": 20.0,
+    "Ubuntu": 507.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 38.95,
-    "Total": 20.0
+    "Self-hosted": 59.89000000000001,
+    "Total": 507.0
   }
 ]
