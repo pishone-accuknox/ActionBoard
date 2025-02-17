@@ -425,10 +425,10 @@
   },
   {
     "date": "2025-02-17",
-    "Ubuntu": 773.0,
+    "Ubuntu": 1319.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 390.89,
-    "Total": 773.0
+    "Self-hosted": 544.1300000000002,
+    "Total": 1319.0
   }
 ]
