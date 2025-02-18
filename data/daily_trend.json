@@ -433,10 +433,10 @@
   },
   {
     "date": "2025-02-18",
-    "Ubuntu": 67.0,
+    "Ubuntu": 70.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 32.61,
-    "Total": 67.0
+    "Self-hosted": 40.66,
+    "Total": 70.0
   }
 ]
