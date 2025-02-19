@@ -441,10 +441,10 @@
   },
   {
     "date": "2025-02-19",
-    "Ubuntu": 240.0,
+    "Ubuntu": 641.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 58.27,
-    "Total": 240.0
+    "Self-hosted": 412.57000000000005,
+    "Total": 641.0
   }
 ]
