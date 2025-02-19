@@ -248110,5 +248110,101 @@
     "total_billable_time": 0.0,
     "run_duration_minutes": 7.8,
     "run_duration_ms": 468000
+  },
+  {
+    "repo": "SRE",
+    "workflow_name": "Run Python Script and Push to S3 demo",
+    "run_id": 13403850397,
+    "status": "success",
+    "created_at": "2025-02-19T01:58:31Z",
+    "updated_at": "2025-02-19T02:04:35Z",
+    "html_url": "https://github.com/accuknox/SRE/actions/runs/13403850397",
+    "head_branch": "Sre-Automation",
+    "head_sha": "22168772b82f65e80369af5e9f0e5e927aaca86e",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-19T01:58:31Z",
+    "workflow_id": 85028954,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 6.07,
+    "run_duration_ms": 364000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 13404110883,
+    "status": "success",
+    "created_at": "2025-02-19T02:22:47Z",
+    "updated_at": "2025-02-19T02:24:08Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/13404110883",
+    "head_branch": "stage",
+    "head_sha": "fb4307a03a6bb33a4e8e9ca3509937648fee40ae",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-19T02:22:47Z",
+    "workflow_id": 129309418,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 2.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 2.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 81000
+  },
+  {
+    "repo": "cluster-management-service",
+    "workflow_name": "cluster-management-service Workflow",
+    "run_id": 13404139458,
+    "status": "success",
+    "created_at": "2025-02-19T02:25:15Z",
+    "updated_at": "2025-02-19T02:33:27Z",
+    "html_url": "https://github.com/accuknox/cluster-management-service/actions/runs/13404139458",
+    "head_branch": "checks",
+    "head_sha": "f435dbde23f95aab0f546409df3218c7a4fa42d1",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-19T02:25:15Z",
+    "workflow_id": 51176644,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 13.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 13.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 492000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 13404572215,
+    "status": "success",
+    "created_at": "2025-02-19T03:05:27Z",
+    "updated_at": "2025-02-19T03:06:11Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/13404572215",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-19T03:05:27Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 44000
   }
 ]
