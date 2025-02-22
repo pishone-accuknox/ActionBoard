@@ -275926,5 +275926,101 @@
     "total_billable_time": 13.0,
     "run_duration_minutes": 0,
     "run_duration_ms": 782000
+  },
+  {
+    "repo": "trivy-db",
+    "workflow_name": "Copy Trivy DB to Private ECR",
+    "run_id": 13472999377,
+    "status": "success",
+    "created_at": "2025-02-22T12:42:15Z",
+    "updated_at": "2025-02-22T12:42:32Z",
+    "html_url": "https://github.com/accuknox/trivy-db/actions/runs/13472999377",
+    "head_branch": "main",
+    "head_sha": "aec90885ae13a719d7cba07c226a7d127d4dee3a",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-22T12:42:15Z",
+    "workflow_id": 139796954,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 17000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 13474005105,
+    "status": "success",
+    "created_at": "2025-02-22T15:01:49Z",
+    "updated_at": "2025-02-22T15:02:34Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/13474005105",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-22T15:01:49Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 1.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 1.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 45000
+  },
+  {
+    "repo": "Accuknox-monitoring",
+    "workflow_name": "Monitoring Pipeline",
+    "run_id": 13473187887,
+    "status": "success",
+    "created_at": "2025-02-22T13:05:36Z",
+    "updated_at": "2025-02-22T13:07:58Z",
+    "html_url": "https://github.com/accuknox/Accuknox-monitoring/actions/runs/13473187887",
+    "head_branch": "prod-helm",
+    "head_sha": "cb03d2ff4223acd6290e00348b5328d3dfaf49cf",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-22T13:05:36Z",
+    "workflow_id": 75412699,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 3.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 3.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 142000
+  },
+  {
+    "repo": "Accuknox-monitoring",
+    "workflow_name": "Push SonarQube scans to SaaS",
+    "run_id": 13473187873,
+    "status": "success",
+    "created_at": "2025-02-22T13:05:35Z",
+    "updated_at": "2025-02-22T13:20:13Z",
+    "html_url": "https://github.com/accuknox/Accuknox-monitoring/actions/runs/13473187873",
+    "head_branch": "prod-helm",
+    "head_sha": "cb03d2ff4223acd6290e00348b5328d3dfaf49cf",
+    "run_attempt": 1,
+    "run_started_at": "2025-02-22T13:05:35Z",
+    "workflow_id": 129918649,
+    "runner_name": "",
+    "is_self_hosted": false,
+    "billable_time": {
+      "Ubuntu": 15.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 15.0,
+    "run_duration_minutes": 0,
+    "run_duration_ms": 878000
   }
 ]
