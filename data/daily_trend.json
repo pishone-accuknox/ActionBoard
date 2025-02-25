@@ -489,10 +489,10 @@
   },
   {
     "date": "2025-02-25",
-    "Ubuntu": 55.0,
+    "Ubuntu": 71.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 31.619999999999997,
-    "Total": 55.0
+    "Self-hosted": 37.55,
+    "Total": 71.0
   }
 ]
