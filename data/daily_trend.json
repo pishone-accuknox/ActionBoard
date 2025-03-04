@@ -537,10 +537,18 @@
   },
   {
     "date": "2025-03-03",
-    "Ubuntu": 1154.0,
+    "Ubuntu": 1155.0,
     "Windows": 0,
     "MacOS": 0,
     "Self-hosted": 1138.119999999999,
-    "Total": 1154.0
+    "Total": 1155.0
+  },
+  {
+    "date": "2025-03-04",
+    "Ubuntu": 16.0,
+    "Windows": 0,
+    "MacOS": 0,
+    "Self-hosted": 35.400000000000006,
+    "Total": 16.0
   }
 ]
