@@ -577,10 +577,10 @@
   },
   {
     "date": "2025-03-08",
-    "Ubuntu": 16.0,
+    "Ubuntu": 19.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 31.979999999999997,
-    "Total": 16.0
+    "Self-hosted": 37.76,
+    "Total": 19.0
   }
 ]
