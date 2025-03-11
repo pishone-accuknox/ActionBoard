@@ -601,10 +601,10 @@
   },
   {
     "date": "2025-03-11",
-    "Ubuntu": 0.0,
+    "Ubuntu": 468.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 85.8,
-    "Total": 0
+    "Self-hosted": 319.82000000000005,
+    "Total": 468.0
   }
 ]
