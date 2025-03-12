@@ -609,10 +609,10 @@
   },
   {
     "date": "2025-03-12",
-    "Ubuntu": 556.0,
+    "Ubuntu": 1104.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 183.86,
-    "Total": 556.0
+    "Self-hosted": 568.5499999999998,
+    "Total": 1104.0
   }
 ]
