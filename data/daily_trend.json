@@ -665,10 +665,10 @@
   },
   {
     "date": "2025-03-19",
-    "Ubuntu": 42.0,
+    "Ubuntu": 261.0,
     "Windows": 0,
     "MacOS": 0,
-    "Self-hosted": 737.7799999999996,
-    "Total": 42.0
+    "Self-hosted": 1114.1699999999994,
+    "Total": 261.0
   }
 ]
