@@ -488494,5 +488494,77 @@
     "total_billable_time": 0.0,
     "run_duration_minutes": 13.83,
     "run_duration_ms": 830000
+  },
+  {
+    "repo": "trivy-db",
+    "workflow_name": "Copy Trivy DB to Private ECR",
+    "run_id": 14148378816,
+    "status": "success",
+    "created_at": "2025-03-29T18:36:30Z",
+    "updated_at": "2025-03-29T18:36:48Z",
+    "html_url": "https://github.com/accuknox/trivy-db/actions/runs/14148378816",
+    "head_branch": "main",
+    "head_sha": "aec90885ae13a719d7cba07c226a7d127d4dee3a",
+    "run_attempt": 1,
+    "run_started_at": "2025-03-29T18:36:30Z",
+    "workflow_id": 139796954,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.3,
+    "run_duration_ms": 18000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 14149376986,
+    "status": "success",
+    "created_at": "2025-03-29T21:01:55Z",
+    "updated_at": "2025-03-29T21:02:41Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/14149376986",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-03-29T21:01:55Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.77,
+    "run_duration_ms": 46000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Lint",
+    "run_id": 14148634623,
+    "status": "success",
+    "created_at": "2025-03-29T19:12:53Z",
+    "updated_at": "2025-03-29T19:13:20Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/14148634623",
+    "head_branch": "AYUSH-Static-filters",
+    "head_sha": "afa908f3f59054a1eaa56749126c31d2486a9712",
+    "run_attempt": 1,
+    "run_started_at": "2025-03-29T19:12:53Z",
+    "workflow_id": 129127051,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.45,
+    "run_duration_ms": 27000
   }
 ]
