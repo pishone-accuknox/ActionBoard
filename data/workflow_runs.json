@@ -549622,5 +549622,101 @@
     "total_billable_time": 0.0,
     "run_duration_minutes": 14.78,
     "run_duration_ms": 887000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Lint",
+    "run_id": 14453850943,
+    "status": "success",
+    "created_at": "2025-04-14T19:16:42Z",
+    "updated_at": "2025-04-14T19:17:03Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/14453850943",
+    "head_branch": "static_filter_fix",
+    "head_sha": "e33ec7fad2d1a4d64daa26ab2fc5d68698c98cca",
+    "run_attempt": 1,
+    "run_started_at": "2025-04-14T19:16:42Z",
+    "workflow_id": 129127051,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.35,
+    "run_duration_ms": 21000
+  },
+  {
+    "repo": "trivy-db",
+    "workflow_name": "Copy Trivy DB to Private ECR",
+    "run_id": 14453163284,
+    "status": "success",
+    "created_at": "2025-04-14T18:38:46Z",
+    "updated_at": "2025-04-14T18:39:06Z",
+    "html_url": "https://github.com/accuknox/trivy-db/actions/runs/14453163284",
+    "head_branch": "main",
+    "head_sha": "aec90885ae13a719d7cba07c226a7d127d4dee3a",
+    "run_attempt": 1,
+    "run_started_at": "2025-04-14T18:38:46Z",
+    "workflow_id": 139796954,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.33,
+    "run_duration_ms": 20000
+  },
+  {
+    "repo": "UI-E2E-testing",
+    "workflow_name": "Lint",
+    "run_id": 14453739100,
+    "status": "success",
+    "created_at": "2025-04-14T19:10:31Z",
+    "updated_at": "2025-04-14T19:10:53Z",
+    "html_url": "https://github.com/accuknox/UI-E2E-testing/actions/runs/14453739100",
+    "head_branch": "static_filter_fix",
+    "head_sha": "7b25ba42424369845f86ca3fa19c0ca1794413d1",
+    "run_attempt": 1,
+    "run_started_at": "2025-04-14T19:10:31Z",
+    "workflow_id": 129127051,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.37,
+    "run_duration_ms": 22000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 14455679538,
+    "status": "success",
+    "created_at": "2025-04-14T21:01:59Z",
+    "updated_at": "2025-04-14T21:02:43Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/14455679538",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-04-14T21:01:59Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.73,
+    "run_duration_ms": 44000
   }
 ]
