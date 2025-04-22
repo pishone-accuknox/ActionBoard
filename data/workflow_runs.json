@@ -606214,5 +606214,77 @@
     "total_billable_time": 0.0,
     "run_duration_minutes": 5.28,
     "run_duration_ms": 317000
+  },
+  {
+    "repo": "trivy-db",
+    "workflow_name": "Copy Trivy DB to Private ECR",
+    "run_id": 14602159419,
+    "status": "success",
+    "created_at": "2025-04-22T18:38:40Z",
+    "updated_at": "2025-04-22T18:39:06Z",
+    "html_url": "https://github.com/accuknox/trivy-db/actions/runs/14602159419",
+    "head_branch": "main",
+    "head_sha": "aec90885ae13a719d7cba07c226a7d127d4dee3a",
+    "run_attempt": 1,
+    "run_started_at": "2025-04-22T18:38:40Z",
+    "workflow_id": 139796954,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.43,
+    "run_duration_ms": 26000
+  },
+  {
+    "repo": "accuknox-jobs",
+    "workflow_name": "Accuknox-Job Workflow",
+    "run_id": 14602804125,
+    "status": "success",
+    "created_at": "2025-04-22T19:16:04Z",
+    "updated_at": "2025-04-22T19:16:22Z",
+    "html_url": "https://github.com/accuknox/accuknox-jobs/actions/runs/14602804125",
+    "head_branch": "CNAPP-19118",
+    "head_sha": "bc8dca65f09b5c98ea859c5534a0dbd84ff3530c",
+    "run_attempt": 1,
+    "run_started_at": "2025-04-22T19:16:04Z",
+    "workflow_id": 78324403,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.3,
+    "run_duration_ms": 18000
+  },
+  {
+    "repo": "selfhosted-vault",
+    "workflow_name": "Backup vault data",
+    "run_id": 14604557650,
+    "status": "success",
+    "created_at": "2025-04-22T21:02:07Z",
+    "updated_at": "2025-04-22T21:02:57Z",
+    "html_url": "https://github.com/accuknox/selfhosted-vault/actions/runs/14604557650",
+    "head_branch": "main",
+    "head_sha": "e2ad2deecef1cb53f692da4aead38cde5f012ad5",
+    "run_attempt": 1,
+    "run_started_at": "2025-04-22T21:02:07Z",
+    "workflow_id": 64163589,
+    "runner_name": "",
+    "is_self_hosted": true,
+    "billable_time": {
+      "Ubuntu": 0.0,
+      "Windows": 0,
+      "MacOS": 0
+    },
+    "total_billable_time": 0.0,
+    "run_duration_minutes": 0.83,
+    "run_duration_ms": 50000
   }
 ]
